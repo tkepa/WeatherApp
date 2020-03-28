@@ -15,6 +15,8 @@ if ('serviceWorker' in navigator) {
 }
 
 // place your code below
+const apiKey = "53c5e97675c8d3d8da07e56aec5a3a22";
+
 
 function success(loc) {
   const {coords} = loc;
@@ -37,8 +39,18 @@ function consolValue(val) {
 }
 
 function location(){
-  navigator.geolocation.getCurrentPosition(success, error, options);
+  return new Promise((resolve, reject) => navigator.geolocation.getCurrentPosition(resolve, error));
 }
 
-location();
-console.log(position);
+async function getLocation() {
+  let position = await location();
+  position = await position.coords;
+  const {latitude, longitude} = position
+  
+  let weatherByPosition = await fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric&lang=pl`)
+  weatherByPosition = await weatherByPosition.json();
+  console.log(weatherByPosition);
+
+}
+getLocation();
+
