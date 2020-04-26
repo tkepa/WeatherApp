@@ -18,11 +18,14 @@ body {
 }
 .container {
   display: flex;
-  justify-content: center;
+  align-items: center;
   padding: 0 0;
+  flex-direction: column;
  
 }
 
+
+//header styles
 .header {
   width: 100%;
   height: 19.5rem;
@@ -93,3 +96,78 @@ body {
     border-color: #FFE74A;
   }
 }
+
+// main container styles
+
+.main__container {
+  width: 980px;
+  display: grid;
+  grid-template-columns: 330px 330px 330px;
+  grid-template-rows: auto;
+  grid-auto-rows: auto;
+  grid-template-areas:
+      "weather chart chart"
+      "weather chart chart"
+      "forecast forecast forecast"
+}
+
+.weatherToday {
+  width: 260px;
+  height: 224px;
+  display: flex;
+  align-items: center;
+  grid-area: weather;
+  border: 1px solid rgba(25, 73, 100, 0.38);
+  border-radius: 5px;
+  margin-top: 20px;
+  flex-direction: column;
+
+  &__header {
+    width: 260px;
+    height: 116px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding-left: 50px;
+    padding-right: 30px;
+    padding-bottom: 20px;
+    align-content: center;
+  }
+  &__head {
+    text-align: start;
+    margin-bottom: 0;
+  }
+
+  &__degrees {
+    width: 260px;
+    height: 116px;
+    padding-top: 20px;
+    background: radial-gradient(50% 50% at 50% 50%, #516F81 0%, #425B6A 100%);
+    align-items: center;
+    border-radius: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+.headText {
+  margin-top: 0;
+  margin-bottom: 0;
+
+  &--degrees {
+    color: #FFE74A;
+    text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.51);
+    font-size: 42px;
+    margin-left: 10px;
+  }
+
+  &--description {
+    color: #FFFFFF;
+    padding-bottom: 10px;
+  }
+}
+
+
+
