@@ -153,6 +153,7 @@ body {
   }
 
   &__parameter {
+    margin-top: -1px;
     min-height: 36px;
     width: 260px;
     border: 1px solid rgba(25, 73, 100, 0.38);
@@ -189,5 +190,20 @@ body {
   }
 }
 
+.chartTemp {
+  width: 680px;
+  height: 329px;
+  margin-top: 20px;
+  border: 1px solid rgba(25, 73, 100, 0.38);
+  border-radius: 5px;
+  grid-area: chart;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
+  &__canvas {
+    //border: 1px solid black;
+    border-radius: 5px;
+  }
+}
 
