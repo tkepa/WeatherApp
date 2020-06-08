@@ -86,13 +86,13 @@ async function getLocation() {
   exclude=hourly&appid=${apiKey}&units=metric&lang=pl`);
   weatherByPosition = await weatherByPosition.json();
   weatherByHour = await weatherByHour.json();
-  console.log(weatherByPosition);
-  console.log(weatherByHour);
   weatherByHour = weatherByHour.hourly;
-  let hourOfWeather = mapAndFilter(weatherByHour.map((obj) => obj.dt));
-  temperature = weatherByHour
-    .map((obj) => obj.temp)
-    .filter((el, index) => index % 2 == 0);
+  const hourOfWeather = mapAndFilter(weatherByHour.map((obj) => obj.dt));
+  temperature = filterTemperature(weatherByHour);
+  temperature = temperatureToChartCoords(temperature);
+  const tempPixels = temperatureToPixel(temperature);
+
+  
 
   
   
@@ -100,7 +100,7 @@ async function getLocation() {
   drawAxis(hourOfWeather);
   await wait(500);
   drawChart(temperature)
-
+  addPopUp();
 }
 
 
@@ -164,17 +164,27 @@ function timestampToTime(stamp) {
   return date.getHours();
 }
 
-function mapAndFilter(arr) {
-  arr = arr.map((el) => timestampToTime(el));
-  arr = arr.filter((el) => el % 2 == 0);
-  return arr;
+function mapAndFilter(tempArray) {
+  tempArray = tempArray.map((el) => timestampToTime(el));
+  tempArray = tempArray.filter((el) => el % 2 == 0);
+  return tempArray;
 }
 
-function drawChart(temp) {
+function temperatureToChartCoords(temp){
   let temperature = temp.map((el) => el / 5);
   temperature = temperature.slice(0,15);
-  let hourOfTemp = [...Array(16).keys()]
-  hourOfTemp = hourOfTemp.slice(2, 15);
+  return temperature;
+}
+
+function getAxisXCoords() {
+  let hourOfTemp = [...Array(17).keys()]
+  hourOfTemp = hourOfTemp.slice(2, 17);
+
+  return hourOfTemp;
+}
+
+function drawChart(temperature) {
+  const tempHours = getAxisXCoords();
   let i = 1;
   function animation() {
     if (i <= temperature.length) {
@@ -183,9 +193,9 @@ function drawChart(temp) {
     ctx.strokeStyle = "#FFE74A";
     ctx.lineWidth = 3;
     ctx.beginPath();
-    ctx.moveTo(blocks(hourOfTemp[i-1]), blocks(temperature[i-1]));
-    ctx.arc(blocks(hourOfTemp[i-1]), blocks(temperature[i-1]), 3, 0, Math.PI * 2, true);
-    ctx.lineTo(blocks(hourOfTemp[i]), blocks(temperature[i]));
+    ctx.moveTo(blocks(tempHours[i-1]), blocks(temperature[i-1]));
+    ctx.arc(blocks(tempHours[i-1]), blocks(temperature[i-1]), 3, 0, Math.PI * 2, true);
+    ctx.lineTo(blocks(tempHours[i]), blocks(temperature[i]));
     ctx.stroke();
     i++;
   }
@@ -195,5 +205,41 @@ function drawChart(temp) {
 async function wait(ms) {
   return new Promise(r => setTimeout(r, ms));
 }
+
+function getMousePosition(canvas, evt) {
+  let rect = canvas.getBoundingClientRect();
+  return {
+    x: evt.clientX - rect.left,
+    y: evt.clientY - rect.top
+  };
+}
+
+function filterTemperature(temperature) {
+  const temp = temperature
+    .map((obj) => obj.temp)
+    .filter((el, index) => index % 2 == 0);
+
+  return temp;
+}
+
+function temperatureToPixel(temp){
+  temp = temp.map(el => blocks(el));
+  return temp;
+}
+
+function hoursToPixel(hours) {
+  hours = hours.map(el => blocks(el));
+  return hours;
+}
+
+function addPopUp(temperature, hours) {
+  canvas.addEventListener('mousemove', function(evt) {
+    const mouseCoords = getMousePosition(canvas, evt);
+    
+  })
+}
+
+
+
 
 getLocation();
