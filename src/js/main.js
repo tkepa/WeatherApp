@@ -22,7 +22,7 @@ if ("serviceWorker" in navigator) {
 
 // place your code below
 const apiKey = "53c5e97675c8d3d8da07e56aec5a3a22";
-let temperature = [];
+
 
 (function () {
   var lastTime = 0;
@@ -88,10 +88,14 @@ async function getLocation() {
   weatherByHour = await weatherByHour.json();
   weatherByHour = weatherByHour.hourly;
   const hourOfWeather = mapAndFilter(weatherByHour.map((obj) => obj.dt));
-  temperature = filterTemperature(weatherByHour);
+  let temperature = filterTemperature(weatherByHour);
   temperature = temperatureToChartCoords(temperature);
   const tempPixels = temperatureToPixel(temperature);
+  const hoursPixels = hoursToPixel(getHoursCoords());
+  
+  const tempPoints = createTempObj(hoursPixels, tempPixels);
 
+  
   
 
   
@@ -100,7 +104,7 @@ async function getLocation() {
   drawAxis(hourOfWeather);
   await wait(500);
   drawChart(temperature)
-  addPopUp();
+  addPopUp(tempPoints);
 }
 
 
@@ -176,7 +180,7 @@ function temperatureToChartCoords(temp){
   return temperature;
 }
 
-function getAxisXCoords() {
+function getHoursCoords() {
   let hourOfTemp = [...Array(17).keys()]
   hourOfTemp = hourOfTemp.slice(2, 17);
 
@@ -184,7 +188,7 @@ function getAxisXCoords() {
 }
 
 function drawChart(temperature) {
-  const tempHours = getAxisXCoords();
+  const tempHours = getHoursCoords();
   let i = 1;
   function animation() {
     if (i <= temperature.length) {
@@ -228,14 +232,48 @@ function temperatureToPixel(temp){
 }
 
 function hoursToPixel(hours) {
-  hours = hours.map(el => blocks(el));
-  return hours;
+  const hourrs = hours.map(el => blocks(el));
+  return hourrs;
 }
 
-function addPopUp(temperature, hours) {
+function createTempObj(hour, temp){
+  const tempPointCoords = [];
+  for (let i = 0; i < temp.length; i++){
+    tempPointCoords.push({
+      x: hour[i],
+      y: temp[i],
+      xmin: hour[i] - 3,
+      xmax: hour[i] + 3,
+      ymin: temp[i] - 3,
+      ymax: temp[i] + 3
+    })
+  }
+  return tempPointCoords;
+}
+
+function drawPoint(coords) {
+  ctx.strokeStyle = "white";
+  ctx.beginPath();
+  ctx.moveTo(coords.x, coords.y);
+  ctx.arc(coords.x, coords.y, 1, 0, Math.PI * 2, true);
+  ctx.stroke();
+}
+
+function addPopUp(tempPoint) {
   canvas.addEventListener('mousemove', function(evt) {
     const mouseCoords = getMousePosition(canvas, evt);
-    
+    const boools = tempPoint.filter(el => {
+      const a = el.xmin <= mouseCoords.x;
+      const b = mouseCoords.x <= el.xmax;
+      const c = el.ymin <= mouseCoords.y;
+      const d = mouseCoords.y <= el.ymax;
+      return (a && b && c && d)});
+    if(boools) {
+      console.log("hej")
+      drawPoint(boools[0]);
+      console.log(canvas);
+    }
+ 
   })
 }
 
