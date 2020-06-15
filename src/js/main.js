@@ -251,29 +251,45 @@ function createTempObj(hour, temp){
   return tempPointCoords;
 }
 
-function drawPoint(coords) {
-  ctx.strokeStyle = "white";
+function drawPoint(coords = {}, radius, color = 'white') {
+  const mouseCoordinate = coords;
+  ctx.strokeStyle = color;
   ctx.beginPath();
-  ctx.moveTo(coords.x, coords.y);
-  ctx.arc(coords.x, coords.y, 1, 0, Math.PI * 2, true);
+  ctx.moveTo(mouseCoordinate.x, mouseCoordinate.y);
+  ctx.arc(mouseCoordinate.x, mouseCoordinate.y, radius, 0, Math.PI * 2, true);
+  ctx.fillStyle = color;
+  ctx.fill();
   ctx.stroke();
 }
 
+let condition = false;
+let state = {};
+let tooltip = document.getElementsByClassName("chartTemp__tooltip");
+tooltip = tooltip[0]
 function addPopUp(tempPoint) {
   canvas.addEventListener('mousemove', function(evt) {
     const mouseCoords = getMousePosition(canvas, evt);
-    const boools = tempPoint.filter(el => {
+    let boools = tempPoint.filter(el => {
       const a = el.xmin <= mouseCoords.x;
       const b = mouseCoords.x <= el.xmax;
       const c = el.ymin <= mouseCoords.y;
       const d = mouseCoords.y <= el.ymax;
-      return (a && b && c && d)});
-    if(boools) {
-      console.log("hej")
-      drawPoint(boools[0]);
-      console.log(canvas);
-    }
- 
+      return (a && b && c && d)})
+    
+    if(boools.length) {
+      drawPoint(boools[0], 1);
+      state = {...boools[0]};
+      condition = true;
+      tooltip.style.left = `${state.x + 5}px`;
+      tooltip.style.top = `${state.y - 35}px`;
+      tooltip.style.display = 'flex';
+    } 
+    else if(!boools.length) {
+      drawPoint(state, 3, "#FFE74A");
+      condition = false;
+      state = {};
+      tooltip.style.display = 'none';
+    } 
   })
 }
 

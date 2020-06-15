@@ -191,6 +191,7 @@ body {
 }
 
 .chartTemp {
+  position: relative;
   width: 680px;
   height: 329px;
   margin-top: 20px;
@@ -205,5 +206,18 @@ body {
     //border: 1px solid black;
     border-radius: 5px;
   }
-}
 
+  &__tooltip {
+    height: 40px;
+    width: 100px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background-color: #fff;
+    border-radius: 5px;
+    border: 2px solid #153B51;
+    font-size: 12px;
+    padding: 5px;
+  }
+}
