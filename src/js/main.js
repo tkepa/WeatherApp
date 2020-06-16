@@ -89,11 +89,12 @@ async function getLocation() {
   weatherByHour = weatherByHour.hourly;
   const hourOfWeather = mapAndFilter(weatherByHour.map((obj) => obj.dt));
   let temperature = filterTemperature(weatherByHour);
-  temperature = temperatureToChartCoords(temperature);
-  const tempPixels = temperatureToPixel(temperature);
+  const temperatureCoords = temperatureToChartCoords(temperature);
+  
+  const tempPixels = temperatureToPixel(temperatureCoords);
   const hoursPixels = hoursToPixel(getHoursCoords());
   
-  const tempPoints = createTempObj(hoursPixels, tempPixels);
+  const tempPoints = createTempObj(hoursPixels, tempPixels, hourOfWeather, temperature);
 
   
   
@@ -103,7 +104,7 @@ async function getLocation() {
   grid();
   drawAxis(hourOfWeather);
   await wait(500);
-  drawChart(temperature)
+  drawChart(temperatureCoords)
   addPopUp(tempPoints);
 }
 
@@ -197,9 +198,9 @@ function drawChart(temperature) {
     ctx.strokeStyle = "#FFE74A";
     ctx.lineWidth = 3;
     ctx.beginPath();
-    ctx.moveTo(blocks(tempHours[i-1]), blocks(temperature[i-1]));
-    ctx.arc(blocks(tempHours[i-1]), blocks(temperature[i-1]), 3, 0, Math.PI * 2, true);
-    ctx.lineTo(blocks(tempHours[i]), blocks(temperature[i]));
+    ctx.moveTo(blocks(tempHours[i-1]), 280 - blocks(temperature[i-1]));
+    ctx.arc(blocks(tempHours[i-1]), 280 - blocks(temperature[i-1]), 3, 0, Math.PI * 2, true);
+    ctx.lineTo(blocks(tempHours[i]), 280 - blocks(temperature[i]));
     ctx.stroke();
     i++;
   }
@@ -227,7 +228,7 @@ function filterTemperature(temperature) {
 }
 
 function temperatureToPixel(temp){
-  temp = temp.map(el => blocks(el));
+  temp = temp.map(el => 280 - blocks(el));
   return temp;
 }
 
@@ -236,7 +237,7 @@ function hoursToPixel(hours) {
   return hourrs;
 }
 
-function createTempObj(hour, temp){
+function createTempObj(hour, temp, hourOfTemp, tempInHour){
   const tempPointCoords = [];
   for (let i = 0; i < temp.length; i++){
     tempPointCoords.push({
@@ -245,7 +246,12 @@ function createTempObj(hour, temp){
       xmin: hour[i] - 3,
       xmax: hour[i] + 3,
       ymin: temp[i] - 3,
-      ymax: temp[i] + 3
+      ymax: temp[i] + 3,
+      hourTemp: {
+        hour: hourOfTemp[i],
+        temp: tempInHour[i]
+      },
+
     })
   }
   return tempPointCoords;
@@ -283,6 +289,7 @@ function addPopUp(tempPoint) {
       tooltip.style.left = `${state.x + 5}px`;
       tooltip.style.top = `${state.y - 35}px`;
       tooltip.style.display = 'flex';
+      tooltip.innerHTML = `Time: ${state.hourTemp.hour}:00, Temp: ${state.hourTemp.temp}°C`;
     } 
     else if(!boools.length) {
       drawPoint(state, 3, "#FFE74A");
