@@ -22,7 +22,7 @@ if ("serviceWorker" in navigator) {
 
 // place your code below
 const apiKey = "53c5e97675c8d3d8da07e56aec5a3a22";
-
+const axisXposition = 280; // X axis is on 280px Canvas Height;
 
 (function () {
   var lastTime = 0;
@@ -198,9 +198,9 @@ function drawChart(temperature) {
     ctx.strokeStyle = "#FFE74A";
     ctx.lineWidth = 3;
     ctx.beginPath();
-    ctx.moveTo(blocks(tempHours[i-1]), 280 - blocks(temperature[i-1]));
-    ctx.arc(blocks(tempHours[i-1]), 280 - blocks(temperature[i-1]), 3, 0, Math.PI * 2, true);
-    ctx.lineTo(blocks(tempHours[i]), 280 - blocks(temperature[i]));
+    ctx.moveTo(blocks(tempHours[i-1]), axisXposition - blocks(temperature[i-1]));
+    ctx.arc(blocks(tempHours[i-1]), axisXposition - blocks(temperature[i-1]), 3, 0, Math.PI * 2, true);
+    ctx.lineTo(blocks(tempHours[i]), axisXposition - blocks(temperature[i]));
     ctx.stroke();
     i++;
   }
@@ -228,7 +228,7 @@ function filterTemperature(temperature) {
 }
 
 function temperatureToPixel(temp){
-  temp = temp.map(el => 280 - blocks(el));
+  temp = temp.map(el => axisXposition - blocks(el));
   return temp;
 }
 
