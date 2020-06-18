@@ -207,7 +207,7 @@ class Chart {
     const tempHours = this.getHoursCoords();
     let i = 1;
     const context = this.ctx
-    const block = this.blocks();
+    const block = this.blocks.bind(this);
     function animation() {
       if (i <= temperature.length) {
         window.requestAnimationFrame(animation);
@@ -229,7 +229,7 @@ class Chart {
   }
   
   getMousePosition(evt) {
-    let rect = canvas.getBoundingClientRect();
+    let rect = this.canvas.getBoundingClientRect();
     return {
       x: evt.clientX - rect.left,
       y: evt.clientY - rect.top
