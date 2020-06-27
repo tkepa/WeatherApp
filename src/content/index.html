@@ -18,67 +18,71 @@
 
     <link rel="manifest" href="manifest.json" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <link
-      rel="apple-touch-icon"
-      sizes="192x192"
-      href=""
-    />
+    <link rel="apple-touch-icon" sizes="192x192" href="" />
 
-    <link
-      rel="icon"
-      type="image/png"
-      href=""
-    />
+    <link rel="icon" type="image/png" href="" />
 
     <link rel="stylesheet" href="css/main.css" />
   </head>
   <body>
     <div class="container">
-
-    
       <header class="header">
-        <img class="logo" src="assets/img/WeatherHead.svg" alt="WeatherAPP logo">
+        <img
+          class="logo"
+          src="assets/img/WeatherHead.svg"
+          alt="WeatherAPP logo"
+        />
         <div class="header__search">
-          <input class="header__search--input" type="text" placeholder="type your city">
+          <input
+            class="header__search--input"
+            type="text"
+            placeholder="type your city"
+          />
           <button class="button header__search--button">Search</button>
           <button class="button header__geolocalization--button"></button>
         </div>
       </header>
-      
+
       <main class="main__container">
         <section class="weatherForToday">
-          <div class="weatherToday">
-            <div class="weatherToday__header">
-              <h2 class="weatherToday__head">Weather</h2>
-              <h3 class="headText">in Lublin, PL</h3>
-              <p class="headText">Today, 16 April</p>
-            </div>
-
-            <div class="weatherToday__degrees">
-              <img class="weatherImage" src="assets/img/clouds.svg">
-              <h2 class="headText--degrees headText">12 °C</h2>
-              <p class="weatherDescription headText--description headText">Overcast clouds</p>
-            </div>
-            <div class="weatherToday__parameter">
-              <p class="weatherToday__parameterName">Wind:</p>
-              <p class="weatherToday__parameterValue">7,4 m/s</p>
-            </div>
-            <div class="weatherToday__parameter">
-              <p class="weatherToday__parameterName">Wind:</p>
-              <p class="weatherToday__parameterValue">7,4 m/s</p>
-            </div>
-            <div class="weatherToday__parameter">
-              <p class="weatherToday__parameterName">Wind:</p>
-              <p class="weatherToday__parameterValue">7,4 m/s</p>
-            </div>
+         <div class="weatherToday">
+          <div class="weatherToday__header">
+            <h2 class="weatherToday__head">Weather</h2>
+            <h3 class="headText">in Lublin, PL</h3>
+            <p class="headText">Today, 16 April</p>
+          </div>
+         
+          <div class="weatherToday__degrees">
+            <img class="weatherImage" src="assets/img/clouds.svg" />
+            <h2 class="headText--degrees headText">12 °C</h2>
+            <p class="weatherDescription headText--description headText">
+              Overcast clouds
+            </p>
+          </div>
+        </div>
+          <div class="weatherToday__parameter">
+            <p class="weatherToday__parameterName">Wind:</p>
+            <p class="weatherToday__parameterValue">7,4 m/s</p>
+          </div>
+          <div class="weatherToday__parameter">
+            <p class="weatherToday__parameterName">Wind:</p>
+            <p class="weatherToday__parameterValue">7,4 m/s</p>
+          </div>
+          <div class="weatherToday__parameter">
+            <p class="weatherToday__parameterName">Wind:</p>
+            <p class="weatherToday__parameterValue">7,4 m/s</p>
           </div>
         </section>
-        <section class="temperatureChart">
-          <div class="chartTemp">
-            <canvas class="chartTemp__canvas" id="chartTemp__canvas"></canvas>
-            <div class="chartTemp__tooltip" id="chartTemp__tooltip">
-            </div>
+        <section class="chartTemp">
+          <canvas class="chartTemp__canvas" id="chartTemp__canvas"></canvas>
+          <div class="chartTemp__tooltip" id="chartTemp__tooltip"></div>
+        </section>
+
+        <section class="weatherForecast">
+          <div class="weatherForecast__day">
+            
           </div>
+
         </section>
       </main>
     </div>

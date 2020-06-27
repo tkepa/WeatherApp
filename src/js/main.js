@@ -87,26 +87,15 @@ async function getLocation() {
   weatherByPosition = await weatherByPosition.json();
   weatherByHour = await weatherByHour.json();
   weatherByHour = weatherByHour.hourly;
-  const chart = new Chart();
-  const hourOfWeather = chart.mapAndFilter(weatherByHour.map((obj) => obj.dt));
-  let temperature = chart.filterTemperature(weatherByHour);
-  const temperatureCoords = chart.temperatureToChartCoords(temperature);
-  
-  const tempPixels = chart.temperatureToPixel(temperatureCoords);
-  const hoursPixels = chart.hoursToPixel(chart.getHoursCoords());
-  
-  const tempPoints = chart.createTempObj(hoursPixels, tempPixels, hourOfWeather, temperature);
 
-  
-  
+  let nextSixteenDays = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&
+  exclude=daily&appid=${apiKey}&units=metric&lang=pl`)
+  nextSixteenDays = await nextSixteenDays.json();
 
-  
-  chart.canvasDimensions();
-  chart.drawGrid();
-  chart.drawAxis(hourOfWeather);
-  await chart.waitForGrid(500);
-  chart.drawChart(temperatureCoords)
-  chart.addPopUp(tempPoints);
+  console.log(nextSixteenDays)
+  const chart = new Chart(weatherByHour);
+  chart.chart();
+ 
 }
 
 
@@ -115,13 +104,12 @@ async function getLocation() {
 
 
 class Chart {
-  constructor() {
+  constructor(weatherData) {
+    this.weatherByHour = weatherData;
     this.condition = false;
     this.state = {};
     this.tooltip = document.getElementsByClassName("chartTemp__tooltip")[0];
-    //this.tooltip = tooltip[0];
     this.canvas = document.getElementById("chartTemp__canvas");
-
     this.ctx = this.canvas.getContext("2d");
   }
 
@@ -314,6 +302,28 @@ class Chart {
     })
   }
   
+  async chart() {
+    const hourOfWeather = this.mapAndFilter(this.weatherByHour.map((obj) => obj.dt));
+    let temperature = this.filterTemperature(this.weatherByHour);
+    const temperatureCoords = this.temperatureToChartCoords(temperature);
+    
+    const tempPixels = this.temperatureToPixel(temperatureCoords);
+    const hoursPixels = this.hoursToPixel(this.getHoursCoords());
+    
+    const tempPoints = this.createTempObj(hoursPixels, tempPixels, hourOfWeather, temperature);
+  
+    
+    
+  
+    
+    this.canvasDimensions();
+    this.drawGrid();
+    this.drawAxis(hourOfWeather);
+    await this.waitForGrid(500);
+    this.drawChart(temperatureCoords)
+    this.addPopUp(tempPoints);
+  }
+
 }
 
 

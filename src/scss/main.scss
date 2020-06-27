@@ -102,15 +102,21 @@ body {
 .main__container {
   width: 980px;
   display: grid;
-  grid-template-columns: 330px 330px 330px;
+  grid-template-columns: 260px 680px;
   grid-template-rows: auto;
   grid-auto-rows: auto;
   grid-template-areas:
-      "weather chart chart"
-      "weather chart chart"
-      "forecast forecast forecast"
+      "weather chart"
+      "weather chart"
+      "forecast forecast";
+  padding-top: 20px;
+  grid-column-gap: 40px;
+  grid-row-gap: 10px;
 }
-
+.weatherForToday{
+  width: 260px;
+  height: 329px;
+}
 .weatherToday {
   width: 260px;
   height: 224px;
@@ -119,7 +125,6 @@ body {
   grid-area: weather;
   border: 1px solid rgba(25, 73, 100, 0.38);
   border-radius: 5px;
-  margin-top: 20px;
   flex-direction: column;
 
   &__header {
@@ -194,7 +199,6 @@ body {
   position: relative;
   width: 680px;
   height: 329px;
-  margin-top: 20px;
   border: 1px solid rgba(25, 73, 100, 0.38);
   border-radius: 5px;
   grid-area: chart;
@@ -203,7 +207,6 @@ body {
   align-items: center;
 
   &__canvas {
-    //border: 1px solid black;
     border-radius: 5px;
   }
 
@@ -219,5 +222,25 @@ body {
     border: 2px solid #153B51;
     font-size: 12px;
     padding: 5px;
+  }
+}
+
+.weatherForecast {
+  position: relative;
+  grid-area: forecast;
+  width: 61.25rem;
+  height: 5.3125rem;
+  border: 1px solid rgba(25, 73, 100, 0.38);
+  border-radius: 5px;
+  display: flex;
+  padding: 10px;
+  display: flex;
+
+  &__day {
+    width: 120px;
+    height: 65px;
+    border-radius: 5px;
+    border: 1px solid rgba(25, 73, 100, 0.38);
+    background-color: #F3F3F3;
   }
 }
