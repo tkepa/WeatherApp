@@ -88,14 +88,15 @@ async function getLocation() {
   weatherByHour = await weatherByHour.json();
   weatherByHour = weatherByHour.hourly;
 
-  let nextSixteenDays = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&
+  let nextSevenDays = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&
   exclude=daily&appid=${apiKey}&units=metric&lang=pl`)
-  nextSixteenDays = await nextSixteenDays.json();
-
-  console.log(nextSixteenDays)
+  nextSevenDays = await nextSevenDays.json();
+  nextSevenDays = nextSevenDays.daily;
   const chart = new Chart(weatherByHour);
   chart.chart();
- 
+  const forecastForWeek = new WeekForecast(nextSevenDays);
+  forecastForWeek.getWeatherParameters();
+
 }
 
 
@@ -326,6 +327,55 @@ class Chart {
 
 }
 
+class WeekForecast {
+  constructor(weekForecastData) {
+    this.weekData = weekForecastData;
+  }
+
+  sliceWeekDataArray(){
+    this.weekData = this.weekData.slice(1,8);
+    console.log(this.weekData)
+  }
+  getTimestampToTime(timestamp) {
+    const time = new Date(timestamp * 1000);
+    return time.getDay();
+  }
+  getNameOfWeek(number) {
+    switch (number) {
+      case 0:
+        return "Sun";
+        break;
+      case 1:
+        return "Mon";
+        break;
+      case 2:
+        return "Tue";
+        break;
+      case 3:
+        return "Wed";
+        break;
+      case 4:
+        return "Thur";
+        break;
+      case 5: 
+        return "Fri";
+        break;
+      case 6:
+        return "Sat";
+        break
+    }
+  }
+  getWeatherParameters(){
+    this.weekData = this.weekData.map(el => [this.getNameOfWeek(this.getTimestampToTime(el.dt)), el.weather[0]]);
+    console.log(this.weekData);
+  }
+
+  putWeatherIntoSection(){
+    this.weekData.forEach(el => {
+
+    })
+  }
+}
 
 
 
