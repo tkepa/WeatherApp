@@ -83,19 +83,19 @@ async function getLocation() {
     `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric&lang=pl`
   );
   let weatherByHour = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&
-  exclude=hourly&appid=${apiKey}&units=metric&lang=pl`);
+  exclude=hourly&appid=${apiKey}&units=metric`);
   weatherByPosition = await weatherByPosition.json();
   weatherByHour = await weatherByHour.json();
   weatherByHour = weatherByHour.hourly;
 
   let nextSevenDays = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&
-  exclude=daily&appid=${apiKey}&units=metric&lang=pl`)
+  exclude=daily&appid=${apiKey}&units=metric`)
   nextSevenDays = await nextSevenDays.json();
   nextSevenDays = nextSevenDays.daily;
   const chart = new Chart(weatherByHour);
   chart.chart();
   const forecastForWeek = new WeekForecast(nextSevenDays);
-  forecastForWeek.getWeatherParameters();
+  forecastForWeek.addWeatherForecast();
 
 }
 
@@ -289,8 +289,14 @@ class Chart {
         this.drawPoint(boools[0], 1);
         this.state = {...boools[0]};
         this.condition = true;
-        this.tooltip.style.left = `${this.state.x + 5}px`;
-        this.tooltip.style.top = `${this.state.y - 35}px`;
+        if (this.canvas.width - (this.state.x + 5) <= 80){
+          this.tooltip.style.right = `${this.canvas.width - (this.state.x + 5)}px`;
+          this.tooltip.style.top = `${this.state.y - 35}px`;
+        }
+        else {
+          this.tooltip.style.left = `${this.state.x + 5}px`;
+          this.tooltip.style.top = `${this.state.y - 35}px`;
+        }
         this.tooltip.style.display = 'flex';
         this.tooltip.innerHTML = `Time: ${this.state.hourTemp.hour}:00, Temp: ${this.state.hourTemp.temp}°C`;
       } 
@@ -330,6 +336,8 @@ class Chart {
 class WeekForecast {
   constructor(weekForecastData) {
     this.weekData = weekForecastData;
+    this.weatherForecastContainer = document.getElementsByClassName("weatherForecast--js");
+    this.weatherForecastContainer = this.weatherForecastContainer[0];
   }
 
   sliceWeekDataArray(){
@@ -366,14 +374,27 @@ class WeekForecast {
     }
   }
   getWeatherParameters(){
-    this.weekData = this.weekData.map(el => [this.getNameOfWeek(this.getTimestampToTime(el.dt)), el.weather[0]]);
-    console.log(this.weekData);
+    this.weekData = this.weekData.map(el => {
+      return {
+        day: this.getNameOfWeek(this.getTimestampToTime(el.dt)), 
+        temp: el.temp.day,
+        weather: el.weather[0].main
+      }
+    });
+    console.log(this.weekData)
   }
 
   putWeatherIntoSection(){
+    this.weatherForecastContainer.innerHTML = '';
     this.weekData.forEach(el => {
-
+      this.weatherForecastContainer.innerHTML += `<div class="weatherForecast__day weatherForecast__day--js"><img src='' alt=''></img><div><p>${el.day}<br>${el.temp}</p></div></div>`
     })
+  }
+
+  addWeatherForecast() {
+    this.sliceWeekDataArray();
+    this.getWeatherParameters();
+    this.putWeatherIntoSection();
   }
 }
 

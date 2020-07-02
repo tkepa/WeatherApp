@@ -234,7 +234,7 @@ body {
   border-radius: 5px;
   display: flex;
   padding: 10px;
-  display: flex;
+  justify-content: space-around;
 
   &__day {
     width: 120px;
@@ -242,5 +242,7 @@ body {
     border-radius: 5px;
     border: 1px solid rgba(25, 73, 100, 0.38);
     background-color: #F3F3F3;
+    display: flex;
+    align-items: center;
   }
 }
