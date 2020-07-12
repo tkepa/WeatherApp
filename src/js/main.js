@@ -290,8 +290,9 @@ class Chart {
         this.state = {...boools[0]};
         this.condition = true;
         if (this.canvas.width - (this.state.x + 5) <= 80){
-          this.tooltip.style.right = `${this.canvas.width - (this.state.x + 5)}px`;
+          this.tooltip.style.left = `${this.state.x - 85}px`
           this.tooltip.style.top = `${this.state.y - 35}px`;
+          
         }
         else {
           this.tooltip.style.left = `${this.state.x + 5}px`;
@@ -387,7 +388,7 @@ class WeekForecast {
   putWeatherIntoSection(){
     this.weatherForecastContainer.innerHTML = '';
     this.weekData.forEach(el => {
-      this.weatherForecastContainer.innerHTML += `<div class="weatherForecast__day weatherForecast__day--js"><img src='' alt=''></img><div><p>${el.day}<br>${el.temp}</p></div></div>`
+      this.weatherForecastContainer.innerHTML += `<div class="weatherForecast__day weatherForecast__day--js"><img src='/assets/img/weathericons/${this.weatherIcon(el.weather)}' alt=''></img><div><p>${el.day}<br>${el.temp}</p></div></div>`
     })
   }
 
@@ -396,6 +397,42 @@ class WeekForecast {
     this.getWeatherParameters();
     this.putWeatherIntoSection();
   }
+
+  weatherIcon(weather) {
+    let currentDate = new Date();
+    currentDate = currentDate.getHours();
+    console.log(currentDate);
+    switch(weather) {
+      case 'thunderstorm':
+        return 'storm.svg';
+        break;
+      case 'Drizzle':
+        return 'Drizzle.svg';
+        break;
+      case 'Rain':
+        return 'Rain.svg';
+        break;
+      case 'Snow':
+        return 'Snowflake.svg';
+        break;
+      case 'Atmosphere':
+        return 'fog.svg';
+        break;
+      case 'Clear':
+        if(currentDate <= 20) {
+          return 'sun.svg';
+          break;
+        }
+        else {
+          return 'moon.svg';
+          break;
+        }
+      case 'Clouds':
+        return 'Clouds.svg'
+        break;
+    }
+  }
+
 }
 
 
