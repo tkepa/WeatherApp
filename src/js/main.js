@@ -82,9 +82,12 @@ async function getLocation() {
   let weatherByPosition = await fetch(
     `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric&lang=pl`
   );
+  
+  
   let weatherByHour = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&
   exclude=hourly&appid=${apiKey}&units=metric`);
   weatherByPosition = await weatherByPosition.json();
+  console.log(weatherByPosition)
   weatherByHour = await weatherByHour.json();
   weatherByHour = weatherByHour.hourly;
 
@@ -103,7 +106,19 @@ async function getLocation() {
 
 
 
-
+class WeatherInformation {
+  constructor(WeatherInfo) {
+    this.location = weatherInfo.name,
+    this.country = weatherInfo.sys.country
+    this.date = new Date(),
+    this.temp = weatherInfo.main.temp,
+    this.iconName = weatherInfo.weather.main,
+    this.pressure = weatherInfo.main.pressure,
+    this.humidity = weatherInfo.main.humidity,
+    this.windSpped = weatherInfo.wind.speed
+  }
+  
+}
 class Chart {
   constructor(weatherData) {
     this.weatherByHour = weatherData;
