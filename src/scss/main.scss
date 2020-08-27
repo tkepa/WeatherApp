@@ -182,7 +182,12 @@ body {
   margin-top: 0;
   margin-bottom: 0;
 
-  &__degrees {
+  &--head {
+    text-align: left;
+    padding-left: 40px;
+  }
+
+  &--degrees {
     color: #FFE74A;
     text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.51);
     font-size: 42px;
@@ -248,4 +253,8 @@ body {
     padding: 8px;
     line-height: 1.5;
   }
+}
+
+.weatherImage {
+  filter: brightness(0) saturate(100%) invert(87%) sepia(81%) saturate(3834%) hue-rotate(320deg) brightness(111%) contrast(103%);
 }
