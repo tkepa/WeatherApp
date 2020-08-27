@@ -409,16 +409,23 @@ body {
   width: 980px;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 330px 330px 330px;
-  grid-template-columns: 330px 330px 330px;
+  -ms-grid-columns: 260px 40px 680px;
+  grid-template-columns: 260px 680px;
   -ms-grid-rows: auto;
   grid-template-rows: auto;
   grid-auto-rows: auto;
-      grid-template-areas: "weather chart chart" "weather chart chart" "forecast forecast forecast"; }
+      grid-template-areas: "weather chart" "weather chart" "forecast forecast";
+  padding-top: 20px;
+  grid-column-gap: 40px;
+  grid-row-gap: 10px; }
+
+.weatherForToday {
+  width: 260px;
+  height: 329px; }
 
 .weatherToday {
   -ms-grid-row: 1;
-  -ms-grid-row-span: 2;
+  -ms-grid-row-span: 3;
   -ms-grid-column: 1;
   width: 260px;
   height: 224px;
@@ -431,7 +438,6 @@ body {
   grid-area: weather;
   border: 1px solid rgba(25, 73, 100, 0.38);
   border-radius: 5px;
-  margin-top: 20px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -499,6 +505,9 @@ body {
 .headText {
   margin-top: 0;
   margin-bottom: 0; }
+  .headText--head {
+    text-align: left;
+    padding-left: 40px; }
   .headText--degrees {
     color: #FFE74A;
     text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.51);
@@ -510,13 +519,11 @@ body {
 
 .chartTemp {
   -ms-grid-row: 1;
-  -ms-grid-row-span: 2;
-  -ms-grid-column: 2;
-  -ms-grid-column-span: 2;
+  -ms-grid-row-span: 3;
+  -ms-grid-column: 3;
   position: relative;
   width: 680px;
   height: 329px;
-  margin-top: 20px;
   border: 1px solid rgba(25, 73, 100, 0.38);
   border-radius: 5px;
   grid-area: chart;
@@ -547,5 +554,42 @@ body {
     border: 2px solid #153B51;
     font-size: 12px;
     padding: 5px; }
+
+.weatherForecast {
+  -ms-grid-row: 5;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
+  position: relative;
+  grid-area: forecast;
+  width: 61.25rem;
+  height: 5.3125rem;
+  border: 1px solid rgba(25, 73, 100, 0.38);
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 10px;
+  -ms-flex-pack: distribute;
+      justify-content: space-around; }
+  .weatherForecast__day {
+    width: 120px;
+    height: 65px;
+    border-radius: 5px;
+    border: 1px solid rgba(25, 73, 100, 0.38);
+    background-color: #F3F3F3;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding: 8px;
+    line-height: 1.5; }
+
+.weatherImage {
+  -webkit-filter: brightness(0) saturate(100%) invert(87%) sepia(81%) saturate(3834%) hue-rotate(320deg) brightness(111%) contrast(103%);
+          filter: brightness(0) saturate(100%) invert(87%) sepia(81%) saturate(3834%) hue-rotate(320deg) brightness(111%) contrast(103%); }
 
 /*# sourceMappingURL=main.css.map */
