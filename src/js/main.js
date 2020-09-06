@@ -482,7 +482,7 @@ class WeekForecast {
   putWeatherIntoSection(){
     this.weatherForecastContainer.innerHTML = '';
     this.weekData.forEach(el => {
-      this.weatherForecastContainer.innerHTML += `<div class="weatherForecast__day weatherForecast__day--js"><img src='/assets/img/weathericons/${this.weatherIcon(el.weather)}' alt=''></img><div><p>${el.day}<br>${el.temp}</p></div></div>`
+      this.weatherForecastContainer.innerHTML += `<div class="weatherForecast__day weatherForecast__day--js"><img class="weatherForecast__dayElement" src='/assets/img/weathericons/${this.weatherIcon(el.weather)}' alt=''></img><div class="weatherForecast__dayElement"><p>${el.day}<br>${el.temp}</p></div></div>`
     })
   }
 

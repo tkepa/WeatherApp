@@ -120,30 +120,24 @@ body {
   grid-row-gap: 20px;
 }
 .weatherForToday{
-  width: 260px;
-  height: 329px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 .weatherToday {
-  width: 260px;
-  height: 224px;
-  display: flex;
-  align-items: center;
-  grid-area: weather;
-  border: 1px solid rgba(25, 73, 100, 0.38);
-  border-radius: 5px;
-  flex-direction: column;
-
   &__header {
     width: 260px;
-    height: 116px;
+    max-height: 120px;
     display: flex;
     justify-content: center;
     flex-direction: column;
     text-align: center;
     padding-left: 50px;
     padding-right: 30px;
-    padding-bottom: 20px;
+    padding-bottom: 19px;
     align-content: center;
+    border: 1px solid rgba(25, 73, 100, 0.38);
+    border-radius: 5px;
   }
   &__head {
     text-align: start;
@@ -165,7 +159,7 @@ body {
 
   &__parameter {
     margin-top: -1px;
-    min-height: 36px;
+    min-height: 40px;
     width: 260px;
     border: 1px solid rgba(25, 73, 100, 0.38);
     border-radius: 5px;
@@ -208,7 +202,7 @@ body {
 .chartTemp {
   position: relative;
   width: 680px;
-  height: 329px;
+  height: 341px;
   border: 1px solid rgba(25, 73, 100, 0.38);
   border-radius: 5px;
   grid-area: chart;
@@ -245,6 +239,8 @@ body {
   display: flex;
   padding: 10px;
   justify-content: space-around;
+  align-items: center;
+  margin-bottom: 10px;
 
   &__day {
     width: 120px;
@@ -253,10 +249,12 @@ body {
     border: 1px solid rgba(25, 73, 100, 0.38);
     background-color: #F3F3F3;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
-    padding: 8px;
     line-height: 1.5;
+  }
+  &__dayElement {
+    margin: 5px;
   }
 }
 
@@ -273,22 +271,63 @@ body {
   flex-shrink: 0;
 }
 
-@media (min-width:48rem) and (max-width:64rem) {
+@media only screen and (min-width:60rem) and (max-width: 70rem) {
+
 
   .chartTemp {
     display: none;
   }
 
   .main__container {
+    padding-top: 20px;
     grid-template-areas:
       "weather forecast"
       "weather forecast";
-
-
   }
+
   .weatherForecast {
+    height: 341px;
+    column-gap: 1;
+    row-gap: 0px;
     justify-content: space-around;
     flex-wrap: wrap;
+
     
+    &__day {
+      margin-right: 5px;
+      margin-left: 5px;
+      flex: 1 1 40%;
+    }
+  }
+}
+
+@media only screen and (max-width: 64rem) {
+  .header {
+    &__search {
+      margin-bottom: 10px;
+      width: 80vh;
+      flex-wrap: wrap;
+      row-gap: 20px;
+    }
+  }
+
+  .main__container {
+    width: 90vw;;
+    padding: 20px;
+    grid-template-areas:
+      "weather"
+      "forecast";
+    justify-items: center;
+  }
+
+  .weatherForToday {
+    width: 80vw;
+    flex-direction: row;
+  }
+
+  .weatherForecast {
+    width: 80vw;;
+    flex-direction: row;
+
   }
 }

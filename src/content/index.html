@@ -45,21 +45,20 @@
 
       <main class="main__container">
         <section class="weatherForToday">
-         <div class="weatherToday">
-          <div class="weatherToday__header">
+        <div class="weatherToday__header">
             <h2 class="weatherToday__head">Weather</h2>
             <h3 class="headText headText--head headText__location--js">in Lublin, PL</h3>
             <p class="headText headText--head headText__date--js">Today, 16 April</p>
-          </div>
+        </div>
          
-          <div class="weatherToday__degrees">
+        <div class="weatherToday__degrees">
             <img class="weatherImage weatherImage--js" src="assets/img/clouds.svg" />
             <h2 class="headText--degrees headText headText--degrees-js">12 °C</h2>
             <p class="headText--description headText--description-js headText">
               Overcast clouds
             </p>
-          </div>
         </div>
+        <div class="weatherToday__parameters">
           <div class="weatherToday__parameter">
             <p class="weatherToday__parameterName">Pressure:</p>
             <p class="weatherToday__parameterValue weatherToday__pressure--js">7,4 m/s</p>
@@ -72,6 +71,7 @@
             <p class="weatherToday__parameterName">Wind speed:</p>
             <p class="weatherToday__parameterValue weatherToday__windSpeed--js">7,4 m/s</p>
           </div>
+        </div>
         </section>
         <section class="chartTemp">
           <canvas class="chartTemp__canvas" id="chartTemp__canvas"></canvas>
