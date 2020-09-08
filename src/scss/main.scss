@@ -128,6 +128,7 @@ body {
 .weatherToday {
   &__header {
     width: 260px;
+    min-width: 160px;
     max-height: 120px;
     display: flex;
     justify-content: center;
@@ -147,6 +148,7 @@ body {
 
   &__degrees {
     width: 260px;
+    min-width: 160px;
     height: 116px;
     padding-top: 20px;
     background: radial-gradient(50% 50% at 50% 50%, #516F81 0%, #425B6A 100%);
@@ -158,10 +160,18 @@ body {
     padding-bottom: 15px;
   }
 
+  &__parameters {
+    display: flex;
+    flex-direction: column;
+    width: 260px;
+    min-width: 160px;
+
+  }
   &__parameter {
     margin-top: -1px;
     min-height: 40px;
-    width: 260px;
+    //width: 260px;
+    //min-width: 160px;
     border: 1px solid rgba(25, 73, 100, 0.38);
     border-radius: 5px;
     line-height: 0.6;
@@ -377,7 +387,74 @@ body {
     flex-direction: row;
     justify-content: center;
     justify-self: center;
+    column-gap: 20px;
     
+  }
+
+  .weatherForecast {
+    margin: 0;
+    width: 80vw;
+    flex-direction: row;
+    flex-wrap: wrap;
+    row-gap: 10px;
+
+    &__day {
+      margin-right: 5px;
+      margin-left: 5px;
+      flex: 1 1 40%;
+    }
+  }
+}
+
+@media only screen and (max-width: 48rem) and (hover: none) and (pointer: coarse)  {
+  .header {
+    &__search {
+      margin-bottom: 10px;
+      width: 80vh;
+      flex-wrap: wrap;
+      row-gap: 20px;
+    }
+  }
+
+  .chartTemp {
+    display: none;
+  }
+  .main__container {
+    width: 90vw;
+    grid-template-columns: 100%;
+    padding: 20px;
+    grid-template-areas:
+      "weather"
+      "chart"
+      "forecast";
+    justify-items: center;
+  }
+
+  .weatherForToday {
+    width: 80vw;
+    flex-direction: row;
+    justify-content: center;
+    justify-self: center;
+    column-gap: 20px;
+    flex-wrap: wrap;
+    row-gap: 20px;
+
+
+    
+  }
+  
+  .weatherToday {
+    &__header {
+      flex-grow: 1;
+    }
+
+    &__degrees {
+      flex-grow: 1;
+    }
+
+    &__parameters {
+      flex-grow: 1;
+    }
   }
 
   .weatherForecast {
