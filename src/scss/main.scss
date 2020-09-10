@@ -413,6 +413,10 @@ body {
       width: 80vh;
       flex-wrap: wrap;
       row-gap: 20px;
+      align-items: stretch;
+      &--input {
+        width: 80vw;
+      }
     }
   }
 
@@ -438,9 +442,6 @@ body {
     column-gap: 20px;
     flex-wrap: wrap;
     row-gap: 20px;
-
-
-    
   }
   
   .weatherToday {
