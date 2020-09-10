@@ -786,7 +786,10 @@ body {
         -ms-flex-align: stretch;
             align-items: stretch; }
     .header__search--input {
-      width: 80vw; }
+      width: 80vw;
+      margin-bottom: 20px; }
+  .button {
+    margin: 0 20px 0 0; }
   .chartTemp {
     display: none; }
   .main__container {
