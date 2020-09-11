@@ -92,7 +92,7 @@ body {
   background-color: #FFE74A;
   border: 1px solid #BDBDBD;
   border-radius: 5px;
-  margin-right: 20px;
+  //margin-right: 20px;
   transition: background-color .3 ease-in-out, color .3 ease-in-out, border-color .3 ease-in-out ;
 
   &:hover {
@@ -282,6 +282,77 @@ body {
   flex-shrink: 0;
 }
 
+@media only screen and (max-width: 26rem ) {
+  
+  .logo {
+    width: 90%;
+  }
+
+  .header {
+    padding: 10px;
+    &__search {
+      width: 80%;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      justify-content: space-evenly;
+      
+      &--input {
+        margin: 0 0 20px 0;
+      }
+    }
+  }
+
+  .main__container {
+    width: 90vw;
+    padding-top: 20px;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-areas:
+        "weather"
+        "forecast";
+    justify-items: center;
+
+  }
+
+  .chartTemp {
+    display: none;
+  }
+
+  .weatherForToday {
+    width: 80vw;
+    align-items: center;
+  }
+
+  .weatherToday {
+    
+    &__header {
+      width: 100%;
+    }
+
+    &__degrees {
+      width: 100%;
+    }
+
+    &__parameters {
+      width: 100%;
+    }
+  }
+
+
+  .weatherForecast {
+    width: 80vw;
+    flex-direction: column;
+    padding-top: 20px;
+
+    &__day {
+      width: 90%;
+      margin-bottom: 10px;
+    }
+  }
+}
+
+/*
+
 @media only screen and (min-width:60rem) and (max-width: 70rem) and (hover: none) and (pointer: coarse) {
 
 
@@ -407,17 +478,23 @@ body {
 }
 
 @media only screen and (max-width: 48rem) and (hover: none) and (pointer: coarse)  {
+
   .header {
     &__search {
       margin-bottom: 10px;
       width: 80vh;
       flex-wrap: wrap;
-      margin-bottom: 20px;
       align-items: stretch;
       &--input {
         width: 80vw;
+        margin: 0;
+        margin-bottom: 20px;
       }
     }
+  }
+
+  .button {
+    margin: 0 20px 0 0;
   }
 
   .chartTemp {
@@ -473,3 +550,5 @@ body {
     }
   }
 }
+
+*/
