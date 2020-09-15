@@ -92,7 +92,6 @@ body {
   background-color: #FFE74A;
   border: 1px solid #BDBDBD;
   border-radius: 5px;
-  //margin-right: 20px;
   transition: background-color .3 ease-in-out, color .3 ease-in-out, border-color .3 ease-in-out ;
 
   &:hover {
@@ -106,7 +105,7 @@ body {
 
 .main__container {
   width: 980px;
-  flex: 1 0 auto; /* 2 */
+  flex: 1 0 auto; 
   display: grid;
   grid-template-columns: 260px 680px;
   grid-auto-rows: auto;
@@ -119,12 +118,19 @@ body {
   grid-column-gap: 40px;
   grid-row-gap: 20px;
 }
+
+.button {
+  margin: 0px 20px 0px 0
+}
+
 .weatherForToday{
   grid-area: weather;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 }
+
+
 .weatherToday {
   &__header {
     width: 260px;
@@ -170,8 +176,6 @@ body {
   &__parameter {
     margin-top: -1px;
     min-height: 40px;
-    //width: 260px;
-    //min-width: 160px;
     border: 1px solid rgba(25, 73, 100, 0.38);
     border-radius: 5px;
     line-height: 0.6;
@@ -368,9 +372,6 @@ body {
     }
   }
 
-  .button {
-    margin: 0 20px 0 0;
-  }
 
   .chartTemp {
     display: none;
@@ -396,13 +397,12 @@ body {
   
   .weatherToday {
     &__header {
-      //margin: 0 10px 20px 0;
       flex-grow: 1;
     }
 
     &__degrees {
       flex-grow: 1;
-      //margin: 0 10px 20px 0;
+      
       
     }
 
@@ -447,210 +447,9 @@ body {
     }
   }
 
-.button {
-  margin-right: 20px;
-}
-
-
-}
-/*
-
-@media only screen and (min-width:60rem) and (max-width: 70rem) and (hover: none) and (pointer: coarse) {
-
-
-  .chartTemp {
-    display: none;
-  }
-
-  .main__container {
-    padding-top: 20px;
-    grid-template-areas:
-      "weather forecast"
-      "weather forecast";
-  }
-
-  .weatherForecast {
-    height: 341px;
-    column-gap: 1;
-    row-gap: 0px;
-    justify-content: space-around;
-    flex-wrap: wrap;
-
-    
-    &__day {
-      margin-right: 5px;
-      margin-left: 5px;
-      flex: 1 1 40%;
-    }
-  }
-}
-
-@media only screen and (max-width: 64rem) {
-  .header {
-    &__search {
-      margin-bottom: 10px;
-      width: 80vh;
-      flex-wrap: wrap;
-      row-gap: 20px;
-    }
-  }
-
-  .chartTemp {
-    width: 76.5vw;
-  }
-  .main__container {
-    width: 90vw;
-    grid-template-columns: 100%;
-    padding: 20px;
-    grid-template-areas:
-      "weather"
-      "chart"
-      "forecast";
-    justify-items: center;
-  }
-
-  .weatherForToday {
-    width: 80vw;
-    flex-direction: row;
-    justify-content: center;
-    justify-self: center;
-    
-  }
-
-  .weatherForecast {
-    width: 76.5vw;;
-    flex-direction: row;
-    flex-wrap: wrap;
-    row-gap: 10px;
-
-    &__day {
-      margin-right: 5px;
-      margin-left: 5px;
-      flex: 1 1 40%;
-    }
-  }
-}
-
-@media only screen and (max-width: 64rem) and (hover: none) and (pointer: coarse)  {
-  .header {
-    &__search {
-      margin-bottom: 10px;
-      width: 80vh;
-      flex-wrap: wrap;
-      row-gap: 20px;
-    }
-  }
-
-  .chartTemp {
-    display: none;
-  }
-  .main__container {
-    width: 90vw;
-    grid-template-columns: 100%;
-    padding: 20px;
-    grid-template-areas:
-      "weather"
-      "chart"
-      "forecast";
-    justify-items: center;
-  }
-
-  .weatherForToday {
-    width: 80vw;
-    flex-direction: row;
-    justify-content: center;
-    justify-self: center;
-    column-gap: 20px;
-    
-  }
-
-  .weatherForecast {
-    margin: 0;
-    width: 80vw;
-    flex-direction: row;
-    flex-wrap: wrap;
-    row-gap: 10px;
-
-    &__day {
-      margin-right: 5px;
-      margin-left: 5px;
-      flex: 1 1 40%;
-    }
-  }
-}
-
-@media only screen and (max-width: 48rem) and (hover: none) and (pointer: coarse)  {
-
-  .header {
-    &__search {
-      margin-bottom: 10px;
-      width: 80vh;
-      flex-wrap: wrap;
-      align-items: stretch;
-      &--input {
-        width: 80vw;
-        margin: 0;
-        margin-bottom: 20px;
-      }
-    }
-  }
-
   .button {
-    margin: 0 20px 0 0;
+  margin-right: 20px;
   }
 
-  .chartTemp {
-    display: none;
-  }
-  .main__container {
-    width: 90vw;
-    grid-template-columns: 100%;
-    padding: 20px;
-    grid-template-areas:
-      "weather"
-      "chart"
-      "forecast";
-    justify-items: center;
-  }
 
-  .weatherForToday {
-    width: 80vw;
-    flex-direction: row;
-    justify-content: center;
-    justify-self: center;
-    //column-gap: 20px;
-    flex-wrap: wrap;
-    //row-gap: 20px;
-  }
-  
-  .weatherToday {
-    &__header {
-      margin: 0 20px 20px 0;
-      flex-grow: 1;
-    }
-
-    &__degrees {
-      flex-grow: 1;
-      margin: 0 0 20px 0;
-    }
-
-    &__parameters {
-      flex-grow: 1;
-    }
-  }
-
-  .weatherForecast {
-    width: 80vw;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-bottom: 10px;
-
-    &__day {
-      margin-right: 5px;
-      margin-left: 5px;
-      flex: 1 1 40%;
-    }
-  }
 }
-
-*/
