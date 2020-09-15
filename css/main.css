@@ -413,7 +413,6 @@ body {
   -webkit-box-flex: 1;
       -ms-flex: 1 0 auto;
           flex: 1 0 auto;
-  /* 2 */
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 260px 40px 680px;
@@ -426,6 +425,9 @@ body {
   padding-top: 40px;
   grid-column-gap: 40px;
   grid-row-gap: 20px; }
+
+.button {
+  margin: 0px 20px 0px 0; }
 
 .weatherForToday {
   -ms-grid-row: 1;
@@ -682,206 +684,101 @@ body {
     -ms-grid-column: 1;
     -ms-grid-column-span: 1; } }
 
-/*
-
-@media only screen and (min-width:60rem) and (max-width: 70rem) and (hover: none) and (pointer: coarse) {
-
-
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait), (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+  .header {
+    padding: 10px; }
+    .header__search {
+      width: 80%;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+      margin-bottom: 20px;
+      -webkit-box-pack: space-evenly;
+          -ms-flex-pack: space-evenly;
+              justify-content: space-evenly; }
+      .header__search--input {
+        margin: 0 20px 20px 0; }
   .chartTemp {
-    display: none;
-  }
-
+    display: none; }
   .main__container {
-    padding-top: 20px;
-    grid-template-areas:
-      "weather forecast"
-      "weather forecast";
-  }
+    width: 90vw;
+    -ms-grid-columns: auto;
+    grid-template-columns: auto;
+    -ms-grid-rows: auto;
+    grid-template-rows: auto;
+    padding: 20px;
+        grid-template-areas: "weather" "forecast";
+    justify-items: center; }
+  .weatherForToday {
+    width: 80vw;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
+    -ms-grid-column-align: center;
+        justify-self: center;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap; }
+  .weatherToday__header {
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1; }
+  .weatherToday__degrees {
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1; }
+  .weatherToday__parameters {
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1; }
+  .weatherForecast {
+    width: 80vw;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -ms-flex-line-pack: justify;
+        align-content: space-between;
+    margin-bottom: 10px;
+    padding-top: 15px; }
+    .weatherForecast__day {
+      margin-right: 5px;
+      margin-left: 5px;
+      margin-bottom: 5px;
+      -webkit-box-flex: 1;
+          -ms-flex: 1 1 40%;
+              flex: 1 1 40%; }
+  .weatherForToday {
+    -ms-grid-row: 1;
+    -ms-grid-row-span: 1;
+    -ms-grid-column: 1; }
+  .weatherForecast {
+    -ms-grid-row: 2;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 1; } }
 
+@media only screen and (min-width: 1025px) and (max-width: 1400px) {
   .weatherForecast {
     height: 341px;
-    column-gap: 1;
+    -webkit-column-gap: 1;
+       -moz-column-gap: 1;
+            column-gap: 1;
     row-gap: 0px;
-    justify-content: space-around;
-    flex-wrap: wrap;
-
-    
-    &__day {
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap; }
+    .weatherForecast__day {
       margin-right: 5px;
       margin-left: 5px;
-      flex: 1 1 40%;
-    }
-  }
-}
-
-@media only screen and (max-width: 64rem) {
-  .header {
-    &__search {
-      margin-bottom: 10px;
-      width: 80vh;
-      flex-wrap: wrap;
-      row-gap: 20px;
-    }
-  }
-
-  .chartTemp {
-    width: 76.5vw;
-  }
-  .main__container {
-    width: 90vw;
-    grid-template-columns: 100%;
-    padding: 20px;
-    grid-template-areas:
-      "weather"
-      "chart"
-      "forecast";
-    justify-items: center;
-  }
-
-  .weatherForToday {
-    width: 80vw;
-    flex-direction: row;
-    justify-content: center;
-    justify-self: center;
-    
-  }
-
-  .weatherForecast {
-    width: 76.5vw;;
-    flex-direction: row;
-    flex-wrap: wrap;
-    row-gap: 10px;
-
-    &__day {
-      margin-right: 5px;
-      margin-left: 5px;
-      flex: 1 1 40%;
-    }
-  }
-}
-
-@media only screen and (max-width: 64rem) and (hover: none) and (pointer: coarse)  {
-  .header {
-    &__search {
-      margin-bottom: 10px;
-      width: 80vh;
-      flex-wrap: wrap;
-      row-gap: 20px;
-    }
-  }
-
-  .chartTemp {
-    display: none;
-  }
-  .main__container {
-    width: 90vw;
-    grid-template-columns: 100%;
-    padding: 20px;
-    grid-template-areas:
-      "weather"
-      "chart"
-      "forecast";
-    justify-items: center;
-  }
-
-  .weatherForToday {
-    width: 80vw;
-    flex-direction: row;
-    justify-content: center;
-    justify-self: center;
-    column-gap: 20px;
-    
-  }
-
-  .weatherForecast {
-    margin: 0;
-    width: 80vw;
-    flex-direction: row;
-    flex-wrap: wrap;
-    row-gap: 10px;
-
-    &__day {
-      margin-right: 5px;
-      margin-left: 5px;
-      flex: 1 1 40%;
-    }
-  }
-}
-
-@media only screen and (max-width: 48rem) and (hover: none) and (pointer: coarse)  {
-
-  .header {
-    &__search {
-      margin-bottom: 10px;
-      width: 80vh;
-      flex-wrap: wrap;
-      align-items: stretch;
-      &--input {
-        width: 80vw;
-        margin: 0;
-        margin-bottom: 20px;
-      }
-    }
-  }
-
+      -webkit-box-flex: 1;
+          -ms-flex: 1 1 40%;
+              flex: 1 1 40%; }
   .button {
-    margin: 0 20px 0 0;
-  }
-
-  .chartTemp {
-    display: none;
-  }
-  .main__container {
-    width: 90vw;
-    grid-template-columns: 100%;
-    padding: 20px;
-    grid-template-areas:
-      "weather"
-      "chart"
-      "forecast";
-    justify-items: center;
-  }
-
-  .weatherForToday {
-    width: 80vw;
-    flex-direction: row;
-    justify-content: center;
-    justify-self: center;
-    //column-gap: 20px;
-    flex-wrap: wrap;
-    //row-gap: 20px;
-  }
-  
-  .weatherToday {
-    &__header {
-      margin: 0 20px 20px 0;
-      flex-grow: 1;
-    }
-
-    &__degrees {
-      flex-grow: 1;
-      margin: 0 0 20px 0;
-    }
-
-    &__parameters {
-      flex-grow: 1;
-    }
-  }
-
-  .weatherForecast {
-    width: 80vw;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-bottom: 10px;
-
-    &__day {
-      margin-right: 5px;
-      margin-left: 5px;
-      flex: 1 1 40%;
-    }
-  }
-}
-
-*/
+    margin-right: 20px; } }
 
 /*# sourceMappingURL=main.css.map */
