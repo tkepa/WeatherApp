@@ -360,17 +360,20 @@ body {
       -ms-flex-direction: column;
           flex-direction: column; }
   .header__search {
-    width: 49%;
+    width: 40%;
+    height: 10vh;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
-    -ms-flex-line-pack: justify;
-        align-content: space-between; }
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -ms-flex-line-pack: center;
+        align-content: center;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap; }
     .header__search--input {
-      width: 480px;
+      min-width: 300px;
+      width: 25vw;
       height: 45px;
       border-radius: 5px;
       border: none;
@@ -620,7 +623,7 @@ body {
 .footer__image {
   width: 100%;
   height: 15vh;
-  background-image: url(../assets/img/footer.svg);
+  background-image: url("../assets/img/footer.svg");
   background-size: cover;
   background-repeat: no-repeat;
   -ms-flex-negative: 0;
@@ -911,7 +914,47 @@ body {
     -ms-grid-column: 1;
     -ms-grid-column-span: 1; } }
 
-@media only screen and (min-width: 1025px) and (max-width: 1400px) {
+@media only screen and (min-width: 1025px) and (max-width: 1700px) {
+  .header {
+    height: 28vh; }
+    .header__search {
+      max-width: 730px;
+      width: 45%;
+      height: 10vh;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-pack: distribute;
+          justify-content: space-around;
+      -ms-flex-line-pack: distribute;
+          align-content: space-around;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
+      .header__search--input {
+        min-width: 225px;
+        width: 25vw;
+        height: 45px;
+        border-radius: 5px;
+        border: none;
+        padding: 10px;
+        font-weight: 900; }
+      .header__search--button {
+        min-width: 100px;
+        width: 10vw;
+        height: 45px;
+        font-weight: 900; }
+    .header__geolocalization--button {
+      width: 80px;
+      height: 45px;
+      margin: 0;
+      background-image: url("../assets/img/localization.svg");
+      background-repeat: no-repeat;
+      background-position: center;
+      -webkit-transition: background-image .3 ease-in-out;
+      -o-transition: background-image .3 ease-in-out;
+      transition: background-image .3 ease-in-out; }
+      .header__geolocalization--button:hover {
+        background-image: url("../assets/img/localization1.svg"); }
   .weatherForecast {
     height: 341px;
     -webkit-column-gap: 1;
@@ -927,8 +970,6 @@ body {
       margin-left: 5px;
       -webkit-box-flex: 1;
           -ms-flex: 1 1 40%;
-              flex: 1 1 40%; }
-  .button {
-    margin-right: 20px; } }
+              flex: 1 1 40%; } }
 
 /*# sourceMappingURL=main.css.map */
