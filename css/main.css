@@ -339,7 +339,7 @@ body {
 
 .header {
   width: 100%;
-  height: 19.5rem;
+  height: 30vh;
   background: -webkit-linear-gradient(257.4deg, #194964 -20.04%, #0D2533 23.76%, #194964 61.63%);
   background: -o-linear-gradient(257.4deg, #194964 -20.04%, #0D2533 23.76%, #194964 61.63%);
   background: linear-gradient(192.6deg, #194964 -20.04%, #0D2533 23.76%, #194964 61.63%);
@@ -360,41 +360,42 @@ body {
       -ms-flex-direction: column;
           flex-direction: column; }
   .header__search {
-    margin-bottom: 47px;
+    width: 49%;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center; }
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -ms-flex-line-pack: justify;
+        align-content: space-between; }
     .header__search--input {
       width: 480px;
       height: 45px;
       border-radius: 5px;
       border: none;
       padding: 10px;
-      margin: 0px 20px 0 20px;
       font-weight: 900; }
     .header__search--button {
-      width: 180px;
+      width: 150px;
       height: 45px;
       font-weight: 900; }
   .header__geolocalization--button {
     width: 80px;
     height: 45px;
     margin: 0;
-    background-image: url("/assets/img/localization.svg");
+    background-image: url("../assets/img/localization.svg");
     background-repeat: no-repeat;
     background-position: center;
     -webkit-transition: background-image .3 ease-in-out;
     -o-transition: background-image .3 ease-in-out;
     transition: background-image .3 ease-in-out; }
     .header__geolocalization--button:hover {
-      background-image: url("/assets/img/localization1.svg"); }
+      background-image: url("../assets/img/localization1.svg"); }
 
 .logo {
-  margin-top: 36px;
-  margin-bottom: 65px; }
+  margin-top: 2vh;
+  margin-bottom: 3vh; }
 
 .button {
   background-color: #FFE74A;
@@ -425,9 +426,6 @@ body {
   padding-top: 40px;
   grid-column-gap: 40px;
   grid-row-gap: 20px; }
-
-.button {
-  margin: 0px 20px 0px 0; }
 
 .weatherForToday {
   -ms-grid-row: 1;
@@ -628,21 +626,25 @@ body {
   -ms-flex-negative: 0;
       flex-shrink: 0; }
 
-@media only screen and (max-width: 26rem) {
+@media only screen and (max-device-width: 416px) and (orientation: portrait) {
   .logo {
     width: 90%; }
   .header {
-    padding: 10px; }
+    padding: 10px;
+    min-height: 250px;
+    height: 23vh; }
     .header__search {
       width: 80%;
+      min-height: 50%;
       -ms-flex-wrap: wrap;
           flex-wrap: wrap;
-      margin-bottom: 20px;
       -webkit-box-pack: space-evenly;
           -ms-flex-pack: space-evenly;
-              justify-content: space-evenly; }
-      .header__search--input {
-        margin: 0 0 20px 0; }
+              justify-content: space-evenly;
+      -ms-flex-line-pack: justify;
+          align-content: space-between; }
+      .header__search--button {
+        width: 50%; }
   .main__container {
     width: 90vw;
     padding-top: 20px;
@@ -684,19 +686,167 @@ body {
     -ms-grid-column: 1;
     -ms-grid-column-span: 1; } }
 
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait), (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+@media only screen and (max-device-width: 731px) and (orientation: landscape) {
+  .logo {
+    width: 90%; }
   .header {
-    padding: 10px; }
+    padding: 10px;
+    height: 43vw; }
     .header__search {
       width: 80%;
+      min-height: 45%;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+      -webkit-box-pack: space-evenly;
+          -ms-flex-pack: space-evenly;
+              justify-content: space-evenly;
+      -ms-flex-line-pack: justify;
+          align-content: space-between; }
+      .header__search--button {
+        width: 50%; }
+  .main__container {
+    width: 90vw;
+    padding-top: 20px;
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 100%;
+    grid-template-columns: 100%;
+        grid-template-areas: "weather" "forecast";
+    justify-items: center; }
+  .chartTemp {
+    display: none; }
+  .weatherForToday {
+    width: 80vw;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center; }
+  .weatherToday__header {
+    width: 100%; }
+  .weatherToday__degrees {
+    width: 100%; }
+  .weatherToday__parameters {
+    width: 100%; }
+  .weatherForecast {
+    width: 80vw;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    padding-top: 20px; }
+    .weatherForecast__day {
+      width: 90%;
+      margin-bottom: 10px; }
+  .weatherForToday {
+    -ms-grid-row: 1;
+    -ms-grid-row-span: 1;
+    -ms-grid-column: 1; }
+  .weatherForecast {
+    -ms-grid-row: 2;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 1; } }
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+  .header {
+    padding: 10px;
+    min-height: 30vh; }
+    .header__search {
+      width: 80%;
+      min-height: 37%;
       -ms-flex-wrap: wrap;
           flex-wrap: wrap;
       margin-bottom: 20px;
       -webkit-box-pack: space-evenly;
           -ms-flex-pack: space-evenly;
-              justify-content: space-evenly; }
+              justify-content: space-evenly;
+      -ms-flex-line-pack: justify;
+          align-content: space-between; }
       .header__search--input {
-        margin: 0 20px 20px 0; }
+        width: 60vw; }
+      .header__search--button {
+        width: 40%; }
+  .chartTemp {
+    display: none; }
+  .main__container {
+    width: 90vw;
+    -ms-grid-columns: auto;
+    grid-template-columns: auto;
+    -ms-grid-rows: auto;
+    grid-template-rows: auto;
+    padding: 20px;
+        grid-template-areas: "weather" "forecast";
+    justify-items: center; }
+  .weatherForToday {
+    width: 80vw;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
+    -ms-grid-column-align: center;
+        justify-self: center;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap; }
+  .weatherToday__header {
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1; }
+  .weatherToday__degrees {
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1; }
+  .weatherToday__parameters {
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1; }
+  .weatherForecast {
+    width: 80vw;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -ms-flex-line-pack: justify;
+        align-content: space-between;
+    margin-bottom: 10px;
+    padding-top: 15px; }
+    .weatherForecast__day {
+      margin-right: 5px;
+      margin-left: 5px;
+      margin-bottom: 5px;
+      -webkit-box-flex: 1;
+          -ms-flex: 1 1 40%;
+              flex: 1 1 40%; }
+  .weatherForToday {
+    -ms-grid-row: 1;
+    -ms-grid-row-span: 1;
+    -ms-grid-column: 1; }
+  .weatherForecast {
+    -ms-grid-row: 2;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 1; } }
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+  .header {
+    padding: 10px;
+    min-height: 32vw; }
+    .header__search {
+      width: 80%;
+      min-height: 42%;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+      margin-bottom: 20px;
+      -webkit-box-pack: space-evenly;
+          -ms-flex-pack: space-evenly;
+              justify-content: space-evenly;
+      -ms-flex-line-pack: justify;
+          align-content: space-between; }
+      .header__search--input {
+        width: 60vw; }
+      .header__search--button {
+        width: 40%; }
   .chartTemp {
     display: none; }
   .main__container {
