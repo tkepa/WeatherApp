@@ -31,7 +31,7 @@ body {
 //header styles
 .header {
   width: 100%;
-  height: 30vh;
+  height: 28vh;
   background: linear-gradient(192.6deg, #194964 -20.04%, #0D2533 23.76%, #194964 61.63%);
   display: flex;
   justify-content: flex-start;
@@ -140,8 +140,8 @@ body {
     justify-content: center;
     flex-direction: column;
     text-align: center;
-    padding-left: 50px;
-    padding-right: 20px;
+    padding-left: 30px;
+    padding-right: 10px;
     padding-bottom: 19px;
     align-content: center;
     border: 1px solid rgba(25, 73, 100, 0.38);
@@ -286,7 +286,8 @@ body {
   flex-shrink: 0;
 }
 
-@media only screen and (max-device-width: 416px ) and (orientation: portrait) {
+@media only screen and (max-device-width: 416px ) and (orientation: portrait),
+only screen and (max-width: 416px) {
   
   .logo {
     width: 90%;
@@ -407,6 +408,10 @@ body {
     align-items: center;
   }
 
+  .headText--degrees {
+    margin-right: 20px;
+  }
+
   .weatherToday {
     
     &__header {
@@ -422,6 +427,9 @@ body {
     }
   }
 
+  .headText--degrees {
+    margin-right: 20px;
+  }
 
   .weatherForecast {
     width: 80vw;
@@ -435,7 +443,85 @@ body {
   }
 }
 
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation: portrait) {
+@media only screen and (max-width : 731px)  {
+  
+  .logo {
+    width: 90%;
+  }
+
+  .header {
+    padding: 10px;
+    height: 30vh;
+    &__search {
+      width: 59vw;
+      min-height: 37%;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-content: space-between;
+
+      &--input {
+        width: 59vw;
+      }
+
+      &--button {
+        width: 50%;
+      }
+    }
+  }
+
+  .main__container {
+    width: 90vw;
+    padding-top: 20px;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-areas:
+        "weather"
+        "forecast";
+    justify-items: center;
+
+  }
+
+  .chartTemp {
+    display: none;
+  }
+
+  .weatherForToday {
+    width: 80vw;
+    align-items: center;
+  }
+
+  .weatherToday {
+    &__header {
+      width: 100%;
+    }
+
+    &__degrees {
+      width: 100%;
+    }
+
+    &__parameters {
+      width: 100%;
+    }
+  }
+
+  .headText--degrees {
+    margin-right: 20px;
+  }
+
+  .weatherForecast {
+    width: 80vw;
+    flex-direction: column;
+    padding-top: 20px;
+
+    &__day {
+      width: 90%;
+      margin-bottom: 10px;
+    }
+  }
+}
+
+@media only screen and (min-device-width : 732px) and (max-device-width : 1024px) and (orientation: portrait),
+only screen and (min-width : 732px) and (max-width : 1024px) {
 
   .header {
     padding: 10px;
@@ -488,6 +574,7 @@ body {
     }
 
     &__degrees {
+      padding: 20px;
       flex-grow: 1;
       
       
@@ -496,6 +583,10 @@ body {
     &__parameters {
       flex-grow: 1;
     }
+  }
+
+  .headText--degrees {
+    margin-right: 20px;
   }
 
   .weatherForecast {
@@ -516,7 +607,7 @@ body {
   }
 }
 
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation: landscape)  {
+@media only screen and (min-device-width : 732px) and (max-device-width : 1024px) and (orientation: landscape)  {
 
   .header {
     padding: 10px;
