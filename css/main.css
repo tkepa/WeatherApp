@@ -337,9 +337,32 @@ body {
           align-items: center;
   padding: 0 0; }
 
+.header--firstLoad {
+  width: 100vw;
+  height: 100vh;
+  background: -webkit-linear-gradient(257.4deg, #194964 -20.04%, #0D2533 23.76%, #194964 61.63%);
+  background: -o-linear-gradient(257.4deg, #194964 -20.04%, #0D2533 23.76%, #194964 61.63%);
+  background: linear-gradient(192.6deg, #194964 -20.04%, #0D2533 23.76%, #194964 61.63%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-flex: 0;
+      -ms-flex: none;
+          flex: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+
 .header {
   width: 100%;
-  height: 30vh;
+  height: 28vh;
   background: -webkit-linear-gradient(257.4deg, #194964 -20.04%, #0D2533 23.76%, #194964 61.63%);
   background: -o-linear-gradient(257.4deg, #194964 -20.04%, #0D2533 23.76%, #194964 61.63%);
   background: linear-gradient(192.6deg, #194964 -20.04%, #0D2533 23.76%, #194964 61.63%);
@@ -412,6 +435,9 @@ body {
     color: white;
     border-color: #FFE74A; }
 
+.main__container--firstLoad {
+  display: none; }
+
 .main__container {
   width: 980px;
   -webkit-box-flex: 1;
@@ -461,8 +487,8 @@ body {
       -ms-flex-direction: column;
           flex-direction: column;
   text-align: center;
-  padding-left: 50px;
-  padding-right: 20px;
+  padding-left: 30px;
+  padding-right: 10px;
   padding-bottom: 19px;
   -ms-flex-line-pack: center;
       align-content: center;
@@ -620,6 +646,9 @@ body {
   -webkit-filter: brightness(0) saturate(100%) invert(87%) sepia(81%) saturate(3834%) hue-rotate(320deg) brightness(111%) contrast(103%);
           filter: brightness(0) saturate(100%) invert(87%) sepia(81%) saturate(3834%) hue-rotate(320deg) brightness(111%) contrast(103%); }
 
+.footer--firstLoad {
+  display: none; }
+
 .footer__image {
   width: 100%;
   height: 15vh;
@@ -629,7 +658,7 @@ body {
   -ms-flex-negative: 0;
       flex-shrink: 0; }
 
-@media only screen and (max-device-width: 416px) and (orientation: portrait) {
+@media only screen and (max-device-width: 416px) and (orientation: portrait), only screen and (max-width: 416px) {
   .logo {
     width: 90%; }
   .header {
@@ -638,7 +667,7 @@ body {
     height: 23vh; }
     .header__search {
       width: 80%;
-      min-height: 50%;
+      max-height: 300px;
       -ms-flex-wrap: wrap;
           flex-wrap: wrap;
       -webkit-box-pack: space-evenly;
@@ -697,7 +726,7 @@ body {
     height: 43vw; }
     .header__search {
       width: 80%;
-      min-height: 45%;
+      max-height: 300px;
       -ms-flex-wrap: wrap;
           flex-wrap: wrap;
       -webkit-box-pack: space-evenly;
@@ -723,12 +752,16 @@ body {
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center; }
+  .headText--degrees {
+    margin-right: 20px; }
   .weatherToday__header {
     width: 100%; }
   .weatherToday__degrees {
     width: 100%; }
   .weatherToday__parameters {
     width: 100%; }
+  .headText--degrees {
+    margin-right: 20px; }
   .weatherForecast {
     width: 80vw;
     -webkit-box-orient: vertical;
@@ -748,13 +781,76 @@ body {
     -ms-grid-column: 1;
     -ms-grid-column-span: 1; } }
 
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+@media only screen and (max-width: 731px) {
+  .logo {
+    width: 90%; }
+  .header {
+    padding: 10px;
+    height: 30vh; }
+    .header__search {
+      max-height: 300px;
+      width: 59vw;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+      -webkit-box-pack: space-evenly;
+          -ms-flex-pack: space-evenly;
+              justify-content: space-evenly;
+      -ms-flex-line-pack: justify;
+          align-content: space-between; }
+      .header__search--input {
+        width: 59vw; }
+      .header__search--button {
+        width: 50%; }
+  .main__container {
+    width: 90vw;
+    padding-top: 20px;
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 100%;
+    grid-template-columns: 100%;
+        grid-template-areas: "weather" "forecast";
+    justify-items: center; }
+  .chartTemp {
+    display: none; }
+  .weatherForToday {
+    width: 80vw;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center; }
+  .weatherToday__header {
+    width: 100%; }
+  .weatherToday__degrees {
+    width: 100%; }
+  .weatherToday__parameters {
+    width: 100%; }
+  .headText--degrees {
+    margin-right: 20px; }
+  .weatherForecast {
+    width: 80vw;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    padding-top: 20px; }
+    .weatherForecast__day {
+      width: 90%;
+      margin-bottom: 10px; }
+  .weatherForToday {
+    -ms-grid-row: 1;
+    -ms-grid-row-span: 1;
+    -ms-grid-column: 1; }
+  .weatherForecast {
+    -ms-grid-row: 2;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 1; } }
+
+@media only screen and (min-device-width: 732px) and (max-device-width: 1024px) and (orientation: portrait), only screen and (min-width: 732px) and (max-width: 1024px) {
   .header {
     padding: 10px;
     min-height: 30vh; }
     .header__search {
       width: 80%;
-      min-height: 37%;
+      max-height: 300px;
       -ms-flex-wrap: wrap;
           flex-wrap: wrap;
       margin-bottom: 20px;
@@ -796,6 +892,7 @@ body {
         -ms-flex-positive: 1;
             flex-grow: 1; }
   .weatherToday__degrees {
+    padding: 20px;
     -webkit-box-flex: 1;
         -ms-flex-positive: 1;
             flex-grow: 1; }
@@ -803,6 +900,8 @@ body {
     -webkit-box-flex: 1;
         -ms-flex-positive: 1;
             flex-grow: 1; }
+  .headText--degrees {
+    margin-right: 20px; }
   .weatherForecast {
     width: 80vw;
     -webkit-box-orient: horizontal;
@@ -831,13 +930,13 @@ body {
     -ms-grid-column: 1;
     -ms-grid-column-span: 1; } }
 
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+@media only screen and (min-device-width: 732px) and (max-device-width: 1024px) and (orientation: landscape) {
   .header {
     padding: 10px;
     min-height: 32vw; }
     .header__search {
       width: 80%;
-      min-height: 42%;
+      max-height: 300px;
       -ms-flex-wrap: wrap;
           flex-wrap: wrap;
       margin-bottom: 20px;
