@@ -25,6 +25,7 @@ if ("serviceWorker" in navigator) {
 // place your code below
 const apiKey = "53c5e97675c8d3d8da07e56aec5a3a22";
 const axisXposition = 280; // X axis is on 280px Canvas Height;
+let classStatus = false;
 
 (function () {
   var lastTime = 0;
@@ -137,7 +138,11 @@ const inputField = document.getElementsByClassName('header__search--inputJS')[0]
 
 localization.addEventListener('click', async () => {
   const locations = await location();
-  getLocation(locations);
+  await getLocation(locations);
+  if(!classStatus) {
+    replaceClasses();
+    classStatus = true
+  }
 })
 
 searchButton.addEventListener('click', async () => {
@@ -147,9 +152,25 @@ searchButton.addEventListener('click', async () => {
   else if (inputField.value) {
     try {
       await getLocation(inputField.value);
+      
+      if(!classStatus) {
+        replaceClasses();
+        classStatus = true;
+      }
+
     }
     catch(error) {
       alert('Please type corret city name')
     }
   }
 })
+
+function replaceClasses() {
+  const header = document.getElementsByClassName("header--firstLoad")[0];
+  const main = document.getElementsByClassName("main__container--firstLoad")[0];
+  const footer = document.getElementsByClassName("footer--firstLoad")[0];
+  
+  header.classList.replace("header--firstLoad", "header");
+  main.classList.replace("main__container--firstLoad", "main__container");
+  footer.classList.replace("header--firstLoad", "footer");
+}
