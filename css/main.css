@@ -667,7 +667,7 @@ body {
     height: 23vh; }
     .header__search {
       width: 80%;
-      max-height: 300px;
+      max-height: 400px;
       -ms-flex-wrap: wrap;
           flex-wrap: wrap;
       -webkit-box-pack: space-evenly;
@@ -726,7 +726,7 @@ body {
     height: 43vw; }
     .header__search {
       width: 80%;
-      max-height: 300px;
+      max-height: 400px;
       -ms-flex-wrap: wrap;
           flex-wrap: wrap;
       -webkit-box-pack: space-evenly;
@@ -789,6 +789,7 @@ body {
     height: 30vh; }
     .header__search {
       max-height: 300px;
+      height: 18%;
       width: 59vw;
       -ms-flex-wrap: wrap;
           flex-wrap: wrap;
@@ -850,7 +851,7 @@ body {
     min-height: 30vh; }
     .header__search {
       width: 80%;
-      max-height: 300px;
+      max-height: 400px;
       -ms-flex-wrap: wrap;
           flex-wrap: wrap;
       margin-bottom: 20px;
