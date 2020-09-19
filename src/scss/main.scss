@@ -36,7 +36,6 @@ body {
   align-items: center;
   flex: none;
   flex-direction: column;
-  
 }
 //header styles
 .header {
@@ -315,7 +314,7 @@ only screen and (max-width: 416px) {
     height: 23vh;
     &__search {
       width: 80%;
-      max-height: 300px;
+      max-height: 400px;
       flex-wrap: wrap;
       //margin-bottom: 20px;
       justify-content: space-evenly;
@@ -392,7 +391,7 @@ only screen and (max-width: 416px) {
     height: 43vw;
     &__search {
       width: 80%;
-      max-height: 300px;
+      max-height: 400px;
       flex-wrap: wrap;
       justify-content: space-evenly;
       align-content: space-between;
@@ -470,6 +469,7 @@ only screen and (max-width: 416px) {
     height: 30vh;
     &__search {
       max-height: 300px;
+      height: 18%;
       width: 59vw;
       flex-wrap: wrap;
       justify-content: space-evenly;
@@ -544,7 +544,7 @@ only screen and (min-width : 732px) and (max-width : 1024px) {
     min-height: 30vh;
     &__search {
       width: 80%;
-      max-height: 300px;
+      max-height: 400px;
       flex-wrap: wrap;
       margin-bottom: 20px;
       justify-content: space-evenly;

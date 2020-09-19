@@ -53,10 +53,6 @@ let classStatus = false;
 
 
 
-function success(loc) {
-  const { coords } = loc;
-}
-
 function error(err) {
   console.warn(`ERROR(${err.code}): ${err.message}`);
 }
@@ -67,9 +63,6 @@ const options = {
   maximumAge: 0,
 };
 
-function consolValue(val) {
-  return val;
-}
 
 function location() {
   return new Promise((resolve, reject) =>
