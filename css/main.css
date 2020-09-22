@@ -652,7 +652,7 @@ body {
 .footer__image {
   width: 100%;
   height: 15vh;
-  background-image: url("../assets/img/footer.svg");
+  background-image: url("../assets/img/Footer.svg");
   background-size: cover;
   background-repeat: no-repeat;
   -ms-flex-negative: 0;
