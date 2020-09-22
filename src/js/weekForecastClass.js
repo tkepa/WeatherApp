@@ -74,7 +74,7 @@ export class WeekForecast {
     currentDate = currentDate.getHours();
     switch (weather) {
       case "thunderstorm":
-        return "storm.svg";
+        return "Storm.svg";
         break;
       case "Drizzle":
         return "Drizzle.svg";
@@ -86,14 +86,14 @@ export class WeekForecast {
         return "Snowflake.svg";
         break;
       case "Atmosphere":
-        return "fog.svg";
+        return "Fog.svg";
         break;
       case "Clear":
         if (currentDate <= 20) {
-          return "sun.svg";
+          return "Sun.svg";
           break;
         } else {
-          return "moon.svg";
+          return "Moon.svg";
           break;
         }
       case "Clouds":
