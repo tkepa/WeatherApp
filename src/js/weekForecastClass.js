@@ -1,18 +1,21 @@
 export class WeekForecast {
   constructor(weekForecastData) {
     this.weekData = weekForecastData;
-    this.weatherForecastContainer = document.getElementsByClassName("weatherForecast--js");
+    this.weatherForecastContainer = document.getElementsByClassName(
+      "weatherForecast--js"
+    );
     this.weatherForecastContainer = this.weatherForecastContainer[0];
   }
 
-  sliceWeekDataArray(){
-    this.weekData = this.weekData.slice(1,8);
-    console.log(this.weekData)
+  sliceWeekDataArray() {
+    this.weekData = this.weekData.slice(1, 8);
   }
+
   getTimestampToTime(timestamp) {
     const time = new Date(timestamp * 1000);
     return time.getDay();
   }
+
   getNameOfWeek(number) {
     switch (number) {
       case 0:
@@ -30,30 +33,34 @@ export class WeekForecast {
       case 4:
         return "Thur";
         break;
-      case 5: 
+      case 5:
         return "Fri";
         break;
       case 6:
         return "Sat";
-        break
+        break;
     }
   }
-  getWeatherParameters(){
-    this.weekData = this.weekData.map(el => {
+  getWeatherParameters() {
+    this.weekData = this.weekData.map((el) => {
       return {
-        day: this.getNameOfWeek(this.getTimestampToTime(el.dt)), 
+        day: this.getNameOfWeek(this.getTimestampToTime(el.dt)),
         temp: el.temp.day,
-        weather: el.weather[0].main
-      }
+        weather: el.weather[0].main,
+      };
     });
-    console.log(this.weekData)
+    console.log(this.weekData);
   }
 
-  putWeatherIntoSection(){
-    this.weatherForecastContainer.innerHTML = '';
-    this.weekData.forEach(el => {
-      this.weatherForecastContainer.innerHTML += `<div class="weatherForecast__day weatherForecast__day--js"><img class="weatherForecast__dayElement" src='assets/img/weathericons/${this.weatherIcon(el.weather)}' alt=''></img><div class="weatherForecast__dayElement"><p>${el.day}<br>${el.temp}</p></div></div>`
-    })
+  putWeatherIntoSection() {
+    this.weatherForecastContainer.innerHTML = "";
+    this.weekData.forEach((el) => {
+      this.weatherForecastContainer.innerHTML += `<div class="weatherForecast__day weatherForecast__day--js"><img class="weatherForecast__dayElement" src='assets/img/weatherIcons/${this.weatherIcon(
+        el.weather
+      )}' alt=''></img><div class="weatherForecast__dayElement"><p>${
+        el.day
+      }<br>${el.temp}</p></div></div>`;
+    });
   }
 
   addWeatherForecast() {
@@ -65,35 +72,33 @@ export class WeekForecast {
   weatherIcon(weather) {
     let currentDate = new Date();
     currentDate = currentDate.getHours();
-    switch(weather) {
-      case 'thunderstorm':
-        return 'storm.svg';
+    switch (weather) {
+      case "thunderstorm":
+        return "storm.svg";
         break;
-      case 'Drizzle':
-        return 'Drizzle.svg';
+      case "Drizzle":
+        return "Drizzle.svg";
         break;
-      case 'Rain':
-        return 'Rain.svg';
+      case "Rain":
+        return "Rain.svg";
         break;
-      case 'Snow':
-        return 'Snowflake.svg';
+      case "Snow":
+        return "Snowflake.svg";
         break;
-      case 'Atmosphere':
-        return 'fog.svg';
+      case "Atmosphere":
+        return "fog.svg";
         break;
-      case 'Clear':
-        if(currentDate <= 20) {
-          return 'sun.svg';
+      case "Clear":
+        if (currentDate <= 20) {
+          return "sun.svg";
+          break;
+        } else {
+          return "moon.svg";
           break;
         }
-        else {
-          return 'moon.svg';
-          break;
-        }
-      case 'Clouds':
-        return 'Clouds.svg'
+      case "Clouds":
+        return "Clouds.svg";
         break;
     }
   }
-
 }
