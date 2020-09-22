@@ -9,7 +9,7 @@ export class Chart {
       this.ctx = this.canvas.getContext("2d");
     }
   
-    canvasDimensions() {|
+    canvasDimensions() {
       this.canvas.width = 660;
       this.canvas.height = 309;
     }
