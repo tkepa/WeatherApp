@@ -383,7 +383,7 @@ body {
       -ms-flex-direction: column;
           flex-direction: column; }
   .header__search {
-    width: 40%;
+    width: 50%;
     height: 10vh;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -395,7 +395,7 @@ body {
     -ms-flex-wrap: wrap;
         flex-wrap: wrap; }
     .header__search--input {
-      min-width: 300px;
+      min-width: 250px;
       width: 25vw;
       height: 45px;
       border-radius: 5px;
@@ -667,6 +667,7 @@ body {
     height: 23vh; }
     .header__search {
       width: 80%;
+      height: 50%;
       max-height: 400px;
       -ms-flex-wrap: wrap;
           flex-wrap: wrap;
@@ -723,10 +724,11 @@ body {
     width: 90%; }
   .header {
     padding: 10px;
-    height: 43vw; }
+    height: 47vw; }
     .header__search {
-      width: 80%;
-      max-height: 400px;
+      width: 60%;
+      max-height: 120px;
+      height: 43%;
       -ms-flex-wrap: wrap;
           flex-wrap: wrap;
       -webkit-box-pack: space-evenly;
@@ -781,15 +783,15 @@ body {
     -ms-grid-column: 1;
     -ms-grid-column-span: 1; } }
 
-@media only screen and (max-width: 731px) {
+@media only screen and (max-width: 731px) and (orientation: portrait) {
   .logo {
     width: 90%; }
   .header {
     padding: 10px;
     height: 30vh; }
     .header__search {
-      max-height: 300px;
-      height: 18%;
+      max-height: 120px;
+      height: 50%;
       width: 59vw;
       -ms-flex-wrap: wrap;
           flex-wrap: wrap;
@@ -821,6 +823,8 @@ body {
   .weatherToday__header {
     width: 100%; }
   .weatherToday__degrees {
+    padding-left: 10px;
+    padding-right: 10px;
     width: 100%; }
   .weatherToday__parameters {
     width: 100%; }
@@ -848,10 +852,11 @@ body {
 @media only screen and (min-device-width: 732px) and (max-device-width: 1024px) and (orientation: portrait), only screen and (min-width: 732px) and (max-width: 1024px) {
   .header {
     padding: 10px;
-    min-height: 30vh; }
+    min-height: 32vh; }
     .header__search {
       width: 80%;
-      max-height: 400px;
+      max-height: 120px;
+      height: 50%;
       -ms-flex-wrap: wrap;
           flex-wrap: wrap;
       margin-bottom: 20px;
@@ -934,10 +939,11 @@ body {
 @media only screen and (min-device-width: 732px) and (max-device-width: 1024px) and (orientation: landscape) {
   .header {
     padding: 10px;
-    min-height: 32vw; }
+    min-height: 36vw; }
     .header__search {
       width: 80%;
-      max-height: 300px;
+      max-height: 120px;
+      height: 50%;
       -ms-flex-wrap: wrap;
           flex-wrap: wrap;
       margin-bottom: 20px;
