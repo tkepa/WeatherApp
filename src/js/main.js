@@ -152,7 +152,7 @@ searchButton.addEventListener("click", async () => {
         classStatus = true;
       }
     } catch (error) {
-      alert("Please type corret city name");
+      alert(`Could not find the city '${inputField.value}`);
     }
   }
 });
