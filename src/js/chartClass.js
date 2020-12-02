@@ -17,7 +17,13 @@ export class Chart {
     blocks(count) {
       return count * 40;
     }
-  
+    
+    setAxisXposition(averageTemp) {
+      if (averageTemp < 15) {
+        this.axisXposition = this.axisXposition / 2 + 20;
+      }
+    }
+
     drawGrid() {
       let gridX = 40;
       let gridY = 40;
@@ -37,31 +43,35 @@ export class Chart {
       }
       this.ctx.stroke();
     }
-  
+    
     async drawAxis(hours) {
-      this.ctx.beginPath();
-      this.ctx.strokeStyle = "black";
-      this.ctx.moveTo(this.blocks(1), this.blocks(1 / 2));
-      this.ctx.lineTo(this.blocks(1), this.blocks(7));
-      this.ctx.lineTo(this.blocks(16), this.blocks(7));
+        this.ctx.beginPath();
+        this.ctx.strokeStyle = "black";
+        this.ctx.moveTo(this.blocks(1), this.blocks(1 / 2));
+        this.ctx.lineTo(this.blocks(1), this.blocks(7));
+        this.ctx.moveTo(this.blocks(1), this.axisXposition);
+        this.ctx.lineTo(this.blocks(16), this.axisXposition);
+        
+        this.ctx.moveTo(this.blocks(1), this.blocks(7));
+        let text = this.axisXposition === 160 ? -15 : 0;
+        let textY = this.blocks(7);
+        for (let i = 1; i <= 7; i++) {
+          this.ctx.strokeText(text, this.blocks(1 / 2), textY);
+          textY -= 40;
+          text += 5;
+        }
+        this.ctx.moveTo(this.blocks(2), this.blocks(7));
+        let textX = this.blocks(1.9);
+              for (let i = 0; i <= 15; i++) {
+          this.ctx.strokeText(hours[i], textX, this.blocks(7.5));
+          textX += 40;
+        }
+        this.ctx.stroke();
+      
+      
+      
     
-      this.ctx.moveTo(this.blocks(1), this.blocks(7));
-      let text = 0;
-      let textY = this.blocks(7);
-      for (let i = 1; i <= 7; i++) {
-        this.ctx.strokeText(text, this.blocks(1 / 2), textY);
-        textY -= 40;
-        text += 5;
-      }
-    
-      this.ctx.moveTo(this.blocks(2), this.blocks(7));
-      let textX = this.blocks(1.9);
-    
-      for (let i = 0; i <= 15; i++) {
-        this.ctx.strokeText(hours[i], textX, this.blocks(7.5));
-        textX += 40;
-      }
-      this.ctx.stroke();
+
     }
     timestampToTime(stamp) {
       let date = new Date(stamp * 1000);
@@ -87,6 +97,10 @@ export class Chart {
       return hourOfTemp;
     }
     
+    getAverageTemp(temperature) {
+      return (temperature.reduce((a,b) => (a+b)) / temperature.length).toFixed(1);
+    }
+
     drawChart(temperature) {
       const tempHours = this.getHoursCoords();
       let i = 1;
@@ -129,8 +143,15 @@ export class Chart {
       return temp;
     }
     
-    temperatureToPixel(temp){
+    temperatureToPixel(temp, averageTemp){
+      if (this.axisXposition === 160) {
+        temp = temp.map(el => this.axisXposition - this.blocks(el));
+        console.log(temp);
+        return temp;
+      }
+      
       temp = temp.map(el => this.axisXposition - this.blocks(el));
+      console.log(temp);
       return temp;
     }
     
@@ -209,16 +230,18 @@ export class Chart {
     async chart() {
       const hourOfWeather = this.mapAndFilter(this.weatherByHour.map((obj) => obj.dt));
       let temperature = this.filterTemperature(this.weatherByHour);
+      const averageTemp = this.getAverageTemp(temperature);
+      this.setAxisXposition(averageTemp);
       const temperatureCoords = this.temperatureToChartCoords(temperature);
       
-      const tempPixels = this.temperatureToPixel(temperatureCoords, this.axisXposition);
+      const tempPixels = this.temperatureToPixel(temperatureCoords, averageTemp);
       const hoursPixels = this.hoursToPixel(this.getHoursCoords());
       
       const tempPoints = this.createTempObj(hoursPixels, tempPixels, hourOfWeather, temperature);
     
       this.canvasDimensions();
       this.drawGrid();
-      this.drawAxis(hourOfWeather);
+      this.drawAxis(hourOfWeather, averageTemp);
       await this.waitForGrid(500);
       this.drawChart(temperatureCoords)
       this.addPopUp(tempPoints);

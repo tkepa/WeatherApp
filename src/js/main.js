@@ -157,6 +157,12 @@ searchButton.addEventListener("click", async () => {
   }
 });
 
+inputField.addEventListener("keyup", (event) => {
+  if (event.keyCode === 13) {
+    searchButton.click();
+  }
+})
+
 function replaceClasses() {
   const header = document.getElementsByClassName("header--firstLoad")[0];
   const main = document.getElementsByClassName("main__container--firstLoad")[0];
