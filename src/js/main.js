@@ -119,6 +119,7 @@ async function getLocation(location) {
   chart.chart();
   const forecastForWeek = new WeekForecast(nextSevenDays);
   forecastForWeek.addWeatherForecast();
+  
 }
 
 const localization = document.getElementsByClassName(

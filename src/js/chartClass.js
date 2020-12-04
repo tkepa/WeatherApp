@@ -7,6 +7,7 @@ export class Chart {
       this.tooltip = document.getElementsByClassName("chartTemp__tooltip")[0];
       this.canvas = document.getElementById("chartTemp__canvas");
       this.ctx = this.canvas.getContext("2d");
+      this.button = document.getElementsByClassName("header__search--buttonJS")[0];
     }
   
     canvasDimensions() {
@@ -19,8 +20,11 @@ export class Chart {
     }
     
     setAxisXposition(averageTemp) {
-      if (averageTemp < 15) {
+      if (averageTemp > 0 && averageTemp < 15) {
         this.axisXposition = this.axisXposition / 2 + 20;
+      }
+      else if (averageTemp < -10) {
+        this.axisXposition = 40;
       }
     }
 
@@ -53,7 +57,7 @@ export class Chart {
         this.ctx.lineTo(this.blocks(16), this.axisXposition);
         
         this.ctx.moveTo(this.blocks(1), this.blocks(7));
-        let text = this.axisXposition === 160 ? -15 : 0;
+        let text = this.axisXposition === 160 ? -15 : (this.axisXposition === 40 ? -30 : 0);
         let textY = this.blocks(7);
         for (let i = 1; i <= 7; i++) {
           this.ctx.strokeText(text, this.blocks(1 / 2), textY);
@@ -127,8 +131,8 @@ export class Chart {
       return new Promise(r => setTimeout(r, ms));
     }
     
-    getMousePosition(evt) {
-      let rect = this.canvas.getBoundingClientRect();
+    getMousePosition(evt, canvas) {
+      let rect = canvas.getBoundingClientRect();
       return {
         x: evt.clientX - rect.left,
         y: evt.clientY - rect.top
@@ -143,16 +147,10 @@ export class Chart {
       return temp;
     }
     
-    temperatureToPixel(temp, averageTemp){
-      if (this.axisXposition === 160) {
-        temp = temp.map(el => this.axisXposition - this.blocks(el));
-        console.log(temp);
-        return temp;
-      }
-      
-      temp = temp.map(el => this.axisXposition - this.blocks(el));
-      console.log(temp);
-      return temp;
+    temperatureToPixel(temp){
+      const pixelTemp = temp.map(el => this.axisXposition - this.blocks(el));
+      console.log(pixelTemp);
+      return pixelTemp;
     }
     
     hoursToPixel(hours) {
@@ -166,10 +164,10 @@ export class Chart {
         tempPointCoords.push({
           x: hour[i],
           y: temp[i],
-          xmin: hour[i] - 3,
-          xmax: hour[i] + 3,
-          ymin: temp[i] - 3,
-          ymax: temp[i] + 3,
+          xmin: Math.abs(hour[i]) - 3,
+          xmax: Math.abs(hour[i]) + 3,
+          ymin: Math.abs(temp[i]) - 3,
+          ymax: Math.abs(temp[i]) + 3,
           hourTemp: {
             hour: hourOfTemp[i],
             temp: tempInHour[i]
@@ -180,61 +178,78 @@ export class Chart {
       return tempPointCoords;
     }
     
-    drawPoint(coords = {}, radius, color = 'white') {
+    drawPoint(ctx, coords = {}, radius, color = 'white') {
       const mouseCoordinate = coords;
-      this.ctx.strokeStyle = color;
-      this.ctx.beginPath();
-      this.ctx.moveTo(mouseCoordinate.x, mouseCoordinate.y);
-      this.ctx.arc(mouseCoordinate.x, mouseCoordinate.y, radius, 0, Math.PI * 2, true);
-      this.ctx.fillStyle = color;
-      this.ctx.fill();
-      this.ctx.stroke();
+      ctx.strokeStyle = color;
+      ctx.beginPath();
+      ctx.moveTo(mouseCoordinate.x, mouseCoordinate.y);
+      ctx.arc(mouseCoordinate.x, mouseCoordinate.y, radius, 0, Math.PI * 2, true);
+      ctx.fillStyle = color;
+      ctx.fill();
+      ctx.stroke();
     }
     
-  
-    addPopUp(tempPoint) {
-      this.canvas.addEventListener('mousemove', (e) => {
-        const mouseCoords = this.getMousePosition(e);
-        let boools = tempPoint.filter(el => {
+    addEvent(pointTemp, mouseCoordinate, drawPoint, canvas, state, tooltip, ctx, condition) {
+      return function(e) {
+          const mouseCoords = mouseCoordinate(e, canvas);
+          let boools = pointTemp.filter(el => {
           const a = el.xmin <= mouseCoords.x;
           const b = mouseCoords.x <= el.xmax;
           const c = el.ymin <= mouseCoords.y;
           const d = mouseCoords.y <= el.ymax;
-          return (a && b && c && d)})
-        
+          return (a && b && c && d)
+        })
+
         if(boools.length) {
-          this.drawPoint(boools[0], 1);
-          this.state = {...boools[0]};
-          this.condition = true;
-          if (this.canvas.width - (this.state.x + 5) <= 80){
-            this.tooltip.style.left = `${this.state.x - 85}px`
-            this.tooltip.style.top = `${this.state.y - 35}px`;
+          drawPoint(ctx, boools[0], 1);
+          state = {...boools[0]};
+          condition = true;
+          if (canvas.width - (state.x + 5) <= 80){
+            tooltip.style.left = `${state.x - 85}px`
+            tooltip.style.top = `${state.y - 35}px`;
             
           }
           else {
-            this.tooltip.style.left = `${this.state.x + 5}px`;
-            this.tooltip.style.top = `${this.state.y - 35}px`;
+            tooltip.style.left = `${state.x + 5}px`;
+            tooltip.style.top = `${state.y - 35}px`;
           }
-          this.tooltip.style.display = 'flex';
-          this.tooltip.innerHTML = `Time: ${this.state.hourTemp.hour}:00, Temp: ${this.state.hourTemp.temp}°C`;
+          tooltip.style.display = 'flex';
+          tooltip.innerHTML = `Time: ${state.hourTemp.hour}:00, Temp: ${state.hourTemp.temp}°C`;
         } 
         else if(!boools.length) {
-          this.drawPoint(this.state, 3, "#FFE74A");
-          this.condition = false;
-          this.state = {};
-          this.tooltip.style.display = 'none';
+          drawPoint(ctx, state, 3, "#FFE74A");
+          condition = false;
+          state = {};
+          tooltip.style.display = 'none';
+          boools = [];
         } 
-      })
+      
+      }
     }
-    
+    addPopUp(tempPoint) {
+      const addEvent1 = this.addEvent(tempPoint, this.getMousePosition, this.drawPoint, this.canvas, this.state, this.tooltip, this.ctx, this.condition);
+      this.canvas.addEventListener('mousemove', addEvent1);
+      this.button.addEventListener("click", e => {
+        this.canvas.removeEventListener('mousemove', addEvent1);
+      });
+      
+      
+    }
+
+    removePopUp(tempPoint) {
+      const addEvent1 = this.addEvent(tempPoint, this.getMousePosition, this.drawPoint, this.canvas, this.state, this.tooltip, this.ctx, this.condition);
+      this.canvas.removeEventListener('mousemove', addEvent1);
+    }
+
     async chart() {
       const hourOfWeather = this.mapAndFilter(this.weatherByHour.map((obj) => obj.dt));
       let temperature = this.filterTemperature(this.weatherByHour);
       const averageTemp = this.getAverageTemp(temperature);
       this.setAxisXposition(averageTemp);
+      
       const temperatureCoords = this.temperatureToChartCoords(temperature);
       
-      const tempPixels = this.temperatureToPixel(temperatureCoords, averageTemp);
+      const tempPixels = this.temperatureToPixel(temperatureCoords);
       const hoursPixels = this.hoursToPixel(this.getHoursCoords());
       
       const tempPoints = this.createTempObj(hoursPixels, tempPixels, hourOfWeather, temperature);
@@ -245,6 +260,7 @@ export class Chart {
       await this.waitForGrid(500);
       this.drawChart(temperatureCoords)
       this.addPopUp(tempPoints);
+      this.removePopUp(tempPoints);
     }
   
   }
