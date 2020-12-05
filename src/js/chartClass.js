@@ -149,7 +149,7 @@ export class Chart {
     
     temperatureToPixel(temp){
       const pixelTemp = temp.map(el => this.axisXposition - this.blocks(el));
-      console.log(pixelTemp);
+      
       return pixelTemp;
     }
     

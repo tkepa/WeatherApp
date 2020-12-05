@@ -49,7 +49,6 @@ export class WeekForecast {
         weather: el.weather[0].main,
       };
     });
-    console.log(this.weekData);
   }
 
   putWeatherIntoSection() {

@@ -100,7 +100,7 @@ async function getLocation(location) {
     weatherByPosition = await weatherByPosition.json();
 
     const coords = weatherByPosition.coord;
-    console.log(coords);
+    
     weatherByHour = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${coords.lat}&lon=${coords.lon}&
     exclude=hourly&appid=${apiKey}&units=metric`);
     weatherByHour = await weatherByHour.json();
