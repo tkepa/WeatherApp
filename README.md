@@ -2,7 +2,7 @@
 ![WeatherApp UI](https://github.com/shzgfx/WeatherApp/blob/master/WeatherApp.png "WeatherApp UI")
 
 ## Description
-WeatherApp is an application created with Javascript, HTML and CSS. App is used for weather forecast which include: today forecast, forecast for next week and daily temperature graph. WeatherApp uses Open Weather Map API to pull data. 
+WeatherApp is an application created with Javascript, HTML and CSS. App is used for weather forecast which include: today forecast, forecast for next week and daily temperature graph. WeatherApp uses Open Weather Map API to pull data. Check it online on ***[ghpages](https://shzgfx.github.io/WeatherApp/)***
 
 ## Technology stack
 * [wtf-gulp-starter by Maciej Korsan](https://github.com/maciejkorsan/wtf-gulp-starter)
